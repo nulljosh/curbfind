@@ -5,8 +5,8 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
 - [ ] Confirm favourites persist across a reload in a browser. Search, detail,
-      photos, sanitised bodies and outbound links are all confirmed working in
-      Chrome; starring a listing is the one path never exercised.
+      photos, sanitised bodies and outbound links all working in Chrome;
+      starring a listing is the one path never exercised.
 - [ ] App icon, `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
 - [ ] Launch the Mac app once to prove the native-direct path end to end.
