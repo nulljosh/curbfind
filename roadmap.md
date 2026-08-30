@@ -4,8 +4,9 @@ Classifieds browser over Craigslist's undocumented JSON API.
 Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
-- [ ] Confirm the web app renders and searches in a real browser — the API is
-      verified by curl, the UI has never been looked at.
+- [ ] Confirm favourites persist across a reload in a browser. Search, detail,
+      photos, sanitised bodies and outbound links are all confirmed working in
+      Chrome; starring a listing is the one path never exercised.
 - [ ] App icon, `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
 - [ ] Launch the Mac app once to prove the native-direct path end to end.
