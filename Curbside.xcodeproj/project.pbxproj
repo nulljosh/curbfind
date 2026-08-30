@@ -1,0 +1,620 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		08893E7D8CF0917B96BD9F5A /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 1BDBA4034C274A7C38EDA826 /* cities.json */; };
+		15E9CA8803E8EE5EE8042DFD /* ListingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19965D1215F6303EEBC1349 /* ListingRow.swift */; };
+		1EF9C2CF81C691CACDA22F4C /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */; };
+		245B99A72B4191D410FB85D4 /* Curbside.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 33F92341DD4A20ABB27A5E45 /* Curbside.entitlements */; };
+		3840A1C4D8902E71A4F330F1 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEE03F055A04BD95980C0 /* ListingDetailView.swift */; };
+		38B6B54425C2CC842DDF2176 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4EB346E4D683E6EBD2D43 /* Listing.swift */; };
+		3A58641731AD6F327F097DA5 /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */; };
+		4382B6FB974F2566448A91E2 /* CurbsideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AE36E7B90C1198B088A031 /* CurbsideApp.swift */; };
+		56DCFC71D58029E9023DD6A6 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10426964F6D8DDEE9B3E7EC0 /* FiltersView.swift */; };
+		5E4E8A6DD5BF9F6A355B75D2 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 1BDBA4034C274A7C38EDA826 /* cities.json */; };
+		713BF6359CAA82CB6CCB363D /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */; };
+		7448C6C962A941F7617DC253 /* CurbsideMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4A3028A6F45EBF7C41CA31 /* CurbsideMacApp.swift */; };
+		76141477D14EE09875355619 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10426964F6D8DDEE9B3E7EC0 /* FiltersView.swift */; };
+		9937A368A45BDD3283A0D575 /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */; };
+		99B3E0E175793DA05754322A /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = B364CD0E19CE0CDAFFCBED5F /* areas.json */; };
+		A7FA0B684FECED90C7673A3F /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */; };
+		AD439F23813D49403055C36B /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED7CAC948A28A15D23675DC /* Favorites.swift */; };
+		BE00B492610804A73BD2A9D3 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A2C62B630D817210E8481 /* Cities.swift */; };
+		BFF0AB6E35A68054670A1EAD /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A2C62B630D817210E8481 /* Cities.swift */; };
+		C1D87352442BC941B0B7B354 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED7CAC948A28A15D23675DC /* Favorites.swift */; };
+		CA5E4481C5A93D394FF7E3E6 /* CraigslistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0325D0FD15F1FFC02063247 /* CraigslistAPI.swift */; };
+		DDB6E471EDE16F20EF2AFBD5 /* CraigslistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0325D0FD15F1FFC02063247 /* CraigslistAPI.swift */; };
+		DE85DA61A1869CD51F4D2813 /* ListingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19965D1215F6303EEBC1349 /* ListingRow.swift */; };
+		DEAB91DF14989F847DE4360B /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4EB346E4D683E6EBD2D43 /* Listing.swift */; };
+		E73B5A7C5201B9F0A836CE9E /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = B364CD0E19CE0CDAFFCBED5F /* areas.json */; };
+		E8682776BBB0F8728F6F9C6B /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEE03F055A04BD95980C0 /* ListingDetailView.swift */; };
+		EC8E05732B3BF286F7597A7F /* CraigslistAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB8EA68F91C895AFE08446 /* CraigslistAPITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6FB0EDF4D46049F24D642C37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F28A13EB9CF9146EEA8A631E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BACE72B486EEA99F0B89217;
+			remoteInfo = Curbside;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B4A3028A6F45EBF7C41CA31 /* CurbsideMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurbsideMacApp.swift; sourceTree = "<group>"; };
+		10426964F6D8DDEE9B3E7EC0 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		15BEEE03F055A04BD95980C0 /* ListingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailView.swift; sourceTree = "<group>"; };
+		1BDBA4034C274A7C38EDA826 /* cities.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		33F92341DD4A20ABB27A5E45 /* Curbside.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Curbside.entitlements; sourceTree = "<group>"; };
+		48AE36E7B90C1198B088A031 /* CurbsideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurbsideApp.swift; sourceTree = "<group>"; };
+		5AAE15970FD51C028A781A06 /* Curbside-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Curbside-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		60D4EB346E4D683E6EBD2D43 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		770980ECC0FDCF167E7D1405 /* CurbsideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurbsideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
+		AED7CAC948A28A15D23675DC /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		B364CD0E19CE0CDAFFCBED5F /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areas.json; sourceTree = "<group>"; };
+		CCAB8EA68F91C895AFE08446 /* CraigslistAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraigslistAPITests.swift; sourceTree = "<group>"; };
+		D08A2C62B630D817210E8481 /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
+		E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "search-fixture.json"; sourceTree = "<group>"; };
+		EF985AA6CB2AFDAA7261650C /* Curbside.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curbside.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0325D0FD15F1FFC02063247 /* CraigslistAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraigslistAPI.swift; sourceTree = "<group>"; };
+		F19965D1215F6303EEBC1349 /* ListingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingRow.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		00FB9613537E0CE6D2176738 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				18BEA66E0A50D4C8BB922355 /* macOS */,
+				DAFD0AEADD8DCC0C8395ED7E /* Models */,
+				BCB6D6C402D3155E26D27503 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		18BEA66E0A50D4C8BB922355 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				0B4A3028A6F45EBF7C41CA31 /* CurbsideMacApp.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		6172A5F4B1F930E20120E5C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5AAE15970FD51C028A781A06 /* Curbside-iOS.app */,
+				EF985AA6CB2AFDAA7261650C /* Curbside.app */,
+				770980ECC0FDCF167E7D1405 /* CurbsideTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		865F1F7691A9A6D8486A1223 = {
+			isa = PBXGroup;
+			children = (
+				DF3CBF37823D843A08E49335 /* iOS */,
+				DE2D3924E37AB073CFA15177 /* Resources */,
+				00FB9613537E0CE6D2176738 /* Sources */,
+				F9BF33F226E270D0010EA6F8 /* Tests */,
+				6172A5F4B1F930E20120E5C5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCB6D6C402D3155E26D27503 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				10426964F6D8DDEE9B3E7EC0 /* FiltersView.swift */,
+				15BEEE03F055A04BD95980C0 /* ListingDetailView.swift */,
+				F19965D1215F6303EEBC1349 /* ListingRow.swift */,
+				9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DAFD0AEADD8DCC0C8395ED7E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D08A2C62B630D817210E8481 /* Cities.swift */,
+				F0325D0FD15F1FFC02063247 /* CraigslistAPI.swift */,
+				AED7CAC948A28A15D23675DC /* Favorites.swift */,
+				60D4EB346E4D683E6EBD2D43 /* Listing.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DE2D3924E37AB073CFA15177 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B364CD0E19CE0CDAFFCBED5F /* areas.json */,
+				1BDBA4034C274A7C38EDA826 /* cities.json */,
+				33F92341DD4A20ABB27A5E45 /* Curbside.entitlements */,
+				E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DF3CBF37823D843A08E49335 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				48AE36E7B90C1198B088A031 /* CurbsideApp.swift */,
+			);
+			name = iOS;
+			path = Sources/iOS;
+			sourceTree = "<group>";
+		};
+		F9BF33F226E270D0010EA6F8 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				CCAB8EA68F91C895AFE08446 /* CraigslistAPITests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0D79EE05670C7B4EE11F0798 /* CurbsideTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D5F815089C5184B20C56D0E /* Build configuration list for PBXNativeTarget "CurbsideTests" */;
+			buildPhases = (
+				CEB5E47409372B7A5A1314DD /* Sources */,
+				5DCB6643C5FD507E32F6C3F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7E52D7067A34F13F2924787A /* PBXTargetDependency */,
+			);
+			name = CurbsideTests;
+			packageProductDependencies = (
+			);
+			productName = CurbsideTests;
+			productReference = 770980ECC0FDCF167E7D1405 /* CurbsideTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		338CA0FFB265E4002CEC0C6A /* Curbside-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DCFB96A1A54AD42D2E59F38 /* Build configuration list for PBXNativeTarget "Curbside-iOS" */;
+			buildPhases = (
+				3AFF4FE467BD6547045CA224 /* Sources */,
+				426425E067072951FD211273 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Curbside-iOS";
+			packageProductDependencies = (
+			);
+			productName = "Curbside-iOS";
+			productReference = 5AAE15970FD51C028A781A06 /* Curbside-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6BACE72B486EEA99F0B89217 /* Curbside */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97C3C9117CD902FFC7D309E4 /* Build configuration list for PBXNativeTarget "Curbside" */;
+			buildPhases = (
+				B44F3C6AB6243C16B7E43653 /* Sources */,
+				D5DD51EDDBD3BFE9678CA887 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Curbside;
+			packageProductDependencies = (
+			);
+			productName = Curbside;
+			productReference = EF985AA6CB2AFDAA7261650C /* Curbside.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F28A13EB9CF9146EEA8A631E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					0D79EE05670C7B4EE11F0798 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+					338CA0FFB265E4002CEC0C6A = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+					6BACE72B486EEA99F0B89217 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+				};
+			};
+			buildConfigurationList = 04A3704061D9229A30C32F5F /* Build configuration list for PBXProject "Curbside" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 865F1F7691A9A6D8486A1223;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6172A5F4B1F930E20120E5C5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6BACE72B486EEA99F0B89217 /* Curbside */,
+				338CA0FFB265E4002CEC0C6A /* Curbside-iOS */,
+				0D79EE05670C7B4EE11F0798 /* CurbsideTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		426425E067072951FD211273 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99B3E0E175793DA05754322A /* areas.json in Resources */,
+				08893E7D8CF0917B96BD9F5A /* cities.json in Resources */,
+				3A58641731AD6F327F097DA5 /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DCB6643C5FD507E32F6C3F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9937A368A45BDD3283A0D575 /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5DD51EDDBD3BFE9678CA887 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				245B99A72B4191D410FB85D4 /* Curbside.entitlements in Resources */,
+				E73B5A7C5201B9F0A836CE9E /* areas.json in Resources */,
+				5E4E8A6DD5BF9F6A355B75D2 /* cities.json in Resources */,
+				1EF9C2CF81C691CACDA22F4C /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3AFF4FE467BD6547045CA224 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE00B492610804A73BD2A9D3 /* Cities.swift in Sources */,
+				CA5E4481C5A93D394FF7E3E6 /* CraigslistAPI.swift in Sources */,
+				4382B6FB974F2566448A91E2 /* CurbsideApp.swift in Sources */,
+				AD439F23813D49403055C36B /* Favorites.swift in Sources */,
+				76141477D14EE09875355619 /* FiltersView.swift in Sources */,
+				38B6B54425C2CC842DDF2176 /* Listing.swift in Sources */,
+				3840A1C4D8902E71A4F330F1 /* ListingDetailView.swift in Sources */,
+				15E9CA8803E8EE5EE8042DFD /* ListingRow.swift in Sources */,
+				713BF6359CAA82CB6CCB363D /* ResultsList.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B44F3C6AB6243C16B7E43653 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFF0AB6E35A68054670A1EAD /* Cities.swift in Sources */,
+				DDB6E471EDE16F20EF2AFBD5 /* CraigslistAPI.swift in Sources */,
+				7448C6C962A941F7617DC253 /* CurbsideMacApp.swift in Sources */,
+				C1D87352442BC941B0B7B354 /* Favorites.swift in Sources */,
+				56DCFC71D58029E9023DD6A6 /* FiltersView.swift in Sources */,
+				DEAB91DF14989F847DE4360B /* Listing.swift in Sources */,
+				E8682776BBB0F8728F6F9C6B /* ListingDetailView.swift in Sources */,
+				DE85DA61A1869CD51F4D2813 /* ListingRow.swift in Sources */,
+				A7FA0B684FECED90C7673A3F /* ResultsList.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEB5E47409372B7A5A1314DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC8E05732B3BF286F7597A7F /* CraigslistAPITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7E52D7067A34F13F2924787A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BACE72B486EEA99F0B89217 /* Curbside */;
+			targetProxy = 6FB0EDF4D46049F24D642C37 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		408C78CE19C7378C974DB9C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Curbside-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Curbside-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside.ios;
+				PRODUCT_NAME = Curbside;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		587005BA8555E8C48D306E93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/Curbside.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside;
+				PRODUCT_NAME = Curbside;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		695C6733F0E61EAB07154F77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		9CF7C4E289F9BD9BC0A4E142 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Curbside-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Curbside-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside.ios;
+				PRODUCT_NAME = Curbside;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B0B5DD14FD72BA5F04DC49B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.CurbsideTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Curbside.app/Contents/MacOS/Curbside";
+			};
+			name = Release;
+		};
+		C249723F2FFFD1BBC465F2F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		DD2359B0E5929E98ECF41D17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/Curbside.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside;
+				PRODUCT_NAME = Curbside;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DFA4C9F600A859B2E13D6CD8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.CurbsideTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Curbside.app/Contents/MacOS/Curbside";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04A3704061D9229A30C32F5F /* Build configuration list for PBXProject "Curbside" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				695C6733F0E61EAB07154F77 /* Debug */,
+				C249723F2FFFD1BBC465F2F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		2D5F815089C5184B20C56D0E /* Build configuration list for PBXNativeTarget "CurbsideTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFA4C9F600A859B2E13D6CD8 /* Debug */,
+				B0B5DD14FD72BA5F04DC49B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7DCFB96A1A54AD42D2E59F38 /* Build configuration list for PBXNativeTarget "Curbside-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CF7C4E289F9BD9BC0A4E142 /* Debug */,
+				408C78CE19C7378C974DB9C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		97C3C9117CD902FFC7D309E4 /* Build configuration list for PBXNativeTarget "Curbside" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD2359B0E5929E98ECF41D17 /* Debug */,
+				587005BA8555E8C48D306E93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F28A13EB9CF9146EEA8A631E /* Project object */;
+}

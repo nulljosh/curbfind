@@ -1,3 +1,6 @@
 node_modules/
 .asc/artifacts/
 dist/
+Curbside.xcodeproj/xcuserdata/
+*.xcarchive
+build/

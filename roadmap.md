@@ -1,28 +1,24 @@
 # Curbside roadmap
 
-Classifieds browser over Craigslist's undocumented JSON API. Plan:
-`~/.claude/plans/magical-noodling-candy.md`.
+Classifieds browser over Craigslist's undocumented JSON API.
+Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
-## Done (2026-08-30)
-- Reverse-engineered `sapi.craigslist.org` end to end: search, detail, images,
-  areaId resolution. All verified against live responses.
-- `worker/decode.js` — turns positional search arrays into real objects.
-- `worker/decode.test.mjs` + `fixtures/search.json` — 3 tests, passing. This is
-  the tripwire if Craigslist reshuffles the array format.
-- `worker/worker.js` + `wrangler.jsonc` — `/api/search`, `/api/post/{uuid}`.
-
-## Next
-- Create the KV namespace and fill `REPLACE_WITH_KV_ID` in `wrangler.jsonc`.
-- Deploy the Worker. **Risk checkpoint:** if Craigslist blocks Cloudflare egress
-  IPs the proxy 403s. Fallback is porting the decoder to Swift and letting native
-  clients call sapi from the user's own IP.
-- Phase 2: `web/index.html` PWA — city/category/query, results grid, detail
-  overlay, favourites in localStorage. Portfolio `tokens.css`.
-- Phase 3/4: iOS then macOS, xcodegen, mirroring `nimble`'s target split.
-- Name check via `asc-name-creator` before any submission.
+## Open
+- [ ] Confirm the web app renders and searches in a real browser — the API is
+      verified by curl, the UI has never been looked at.
+- [ ] App icon, `architecture.svg`, `metadata/`, `.asc/workflow.json`.
+- [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
+- [ ] Launch the Mac app once to prove the native-direct path end to end.
+- [ ] Custom domain instead of the pages.dev URL.
+- [ ] Decide on watchOS/visionOS. Deliberately skipped for now: a 360-result
+      photo grid has no watch story and no visionOS-specific affordance.
 
 ## Notes
-- Nothing in the name, icon, or listing may reference Craigslist. They hold the
-  mark and have sued third-party clients before. Every reply links out to
-  craigslist.org.
-- `sapi` ignores `cc` and rejects any page size but 360.
+- `sapi` ignores User-Agent completely, so native needs no disguise and no server.
+- `cc` is ignored upstream; any page size but 360 is rejected.
+- Posting bodies are stranger-authored HTML. Both decoders strip them to plain
+  text; nothing may ever render them as markup.
+- Craigslist does **not** block Cloudflare egress — verified against the live
+  deployed Worker.
+- Nothing ships under Craigslist's name. They hold the mark and have sued
+  third-party clients before.
