@@ -4,7 +4,7 @@ A faster way to browse local classifieds. Web, iOS and macOS.
 
 | Platform | Status | Talks to |
 |---|---|---|
-| Web | live — https://curbside-3v2.pages.dev | Cloudflare Worker (CORS leaves no choice) |
+| Web | live — https://curbside.heyitsmejosh.com | Cloudflare Worker (CORS leaves no choice) |
 | iOS | builds | Craigslist directly, no server |
 | macOS | builds | Craigslist directly, no server |
 
