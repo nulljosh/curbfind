@@ -60,3 +60,24 @@ export function decodeSearch(payload) {
     location: d.location,
   };
 }
+
+// Posting bodies are HTML written by strangers. Nothing downstream may render
+// them as markup, so collapse to plain text here and let every client insert it
+// as a text node. Deliberately not a general HTML sanitiser: an allowlist you
+// have to keep correct is a liability, and Craigslist bodies are only ever
+// paragraphs, breaks and links.
+export function sanitizeBody(html) {
+  if (!html) return "";
+  return html
+    .replace(/<br\s*\/?>\s*/gi, "\n")
+    .replace(/<\/p>\s*/gi, "\n\n")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0*39;|&apos;/g, "'")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}

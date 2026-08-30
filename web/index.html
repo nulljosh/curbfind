@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Curbside</title>
+<meta name="description" content="A faster way to browse local classifieds.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);font-size:15px;line-height:1.45}
+header{border-bottom:var(--rule);padding:14px 16px;position:sticky;top:0;background:var(--bg);z-index:5}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em;margin:0 0 10px}
+.brand b{background:var(--bulb);padding:0 6px}
+form{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,select,button{font:inherit;font-family:var(--font-body);border:1px solid var(--text);background:var(--bg);color:var(--text);padding:7px 9px;border-radius:0;min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--bulb);outline-offset:1px}
+#q{flex:1 1 220px}
+button{cursor:pointer;font-weight:600}
+button.go{background:var(--bulb);border-color:var(--text)}
+.more-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%}
+.more-filters[hidden]{display:none}
+label.chk{display:flex;gap:5px;align-items:center;font-size:14px;color:var(--text2)}
+.narrow{width:96px}
+#status{padding:12px 16px;color:var(--text2)}
+#grid{list-style:none;margin:0;padding:16px;display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.card{border:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg)}
+.card:hover{border-color:var(--bulb)}
+.card button.open{all:unset;cursor:pointer;display:flex;flex-direction:column;height:100%}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2);display:block}
+.noimg{width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px}
+.meta{padding:9px 10px;display:flex;flex-direction:column;gap:3px;flex:1}
+.price{font-weight:700}
+.title{font-size:14px}
+.sub{font-size:12.5px;color:var(--text2)}
+.star{position:absolute;top:6px;right:6px;background:var(--bg);border:1px solid var(--text);width:30px;height:30px;line-height:1;font-size:15px;padding:0}
+.star[aria-pressed=true]{background:var(--bulb)}
+.cardwrap{position:relative}
+#more{display:block;margin:0 auto 32px;padding:9px 22px}
+dialog{border:2px solid var(--text);padding:0;max-width:720px;width:calc(100% - 32px);background:var(--bg);color:var(--text)}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.dhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:14px 16px;border-bottom:1px solid var(--border)}
+.dbody{padding:14px 16px}
+.dbody p{white-space:pre-wrap;margin:0 0 14px}
+.shots{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.shots img{height:190px;border:1px solid var(--border)}
+.attrs{list-style:none;padding:0;margin:0 0 14px;font-size:13.5px;color:var(--text2)}
+.out{display:inline-block;background:var(--bulb);color:var(--text);border:1px solid var(--text);padding:8px 14px;text-decoration:none;font-weight:600}
+footer{padding:18px 16px;border-top:1px solid var(--border);font-size:13px;color:var(--text2)}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<header>
+  <p class="brand"><b>Curbside</b></p>
+  <form id="f">
+    <input id="q" name="q" placeholder="Search listings" aria-label="Search listings">
+    <input id="city" name="city" list="cities" value="vancouver" aria-label="City" size="14">
+    <datalist id="cities"></datalist>
+    <select id="cat" name="cat" aria-label="Category"></select>
+    <button class="go" type="submit">Search</button>
+    <button type="button" id="toggle" aria-expanded="false">Filters</button>
+    <button type="button" id="favbtn" aria-pressed="false">Saved</button>
+    <div class="more-filters" id="filters" hidden>
+      <input class="narrow" id="min_price" type="number" min="0" placeholder="Min $" aria-label="Minimum price">
+      <input class="narrow" id="max_price" type="number" min="0" placeholder="Max $" aria-label="Maximum price">
+      <input class="narrow" id="postal" placeholder="Postal" aria-label="Postal code">
+      <input class="narrow" id="search_distance" type="number" min="1" placeholder="km" aria-label="Distance">
+      <select id="sort" aria-label="Sort">
+        <option value="rel">Best match</option>
+        <option value="date">Newest</option>
+        <option value="priceasc">Price: low to high</option>
+        <option value="pricedsc">Price: high to low</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="hasPic"> Has photo</label>
+    </div>
+  </form>
+</header>
+
+<p id="status">Search to begin.</p>
+<ul id="grid"></ul>
+<button id="more" hidden>Show more</button>
+
+<dialog id="detail">
+  <div class="dhead">
+    <div><strong id="dtitle"></strong><div class="sub" id="dsub"></div></div>
+    <button id="dclose" aria-label="Close">Close</button>
+  </div>
+  <div class="dbody">
+    <div class="shots" id="dshots"></div>
+    <ul class="attrs" id="dattrs"></ul>
+    <p id="dtext"></p>
+    <a class="out" id="dlink" target="_blank" rel="noopener noreferrer">View original posting</a>
+  </div>
+</dialog>
+
+<footer>
+  Curbside reads public classifieds listings. It is not affiliated with, endorsed by, or
+  connected to craigslist. Replying to a posting opens the original site.
+</footer>
+
+<script type="module">
+const API = location.hostname === "localhost" ? "http://localhost:8787" : "https://curbside-api.trommatic.workers.dev";
+const PAGE = 60;
+
+const CATEGORIES = [
+  ["sss", "For sale"], ["hhh", "Housing"], ["apa", "Apartments / housing"],
+  ["bbb", "Jobs (all)"], ["jjj", "Jobs"], ["ggg", "Gigs"],
+  ["cta", "Cars & trucks"], ["ccc", "Community"], ["rrr", "Resumes"],
+];
+
+const $ = (id) => document.getElementById(id);
+const grid = $("grid"), status = $("status");
+
+let results = [], shown = 0, showingFavs = false;
+
+// ponytail: favourites are ids -> the card object, so the Saved view needs no
+// network at all. A few hundred small objects is nothing for localStorage.
+const favs = {
+  all: JSON.parse(localStorage.getItem("curbside:favs") || "{}"),
+  has(id) { return id in this.all; },
+  toggle(item) {
+    if (this.has(item.id)) delete this.all[item.id]; else this.all[item.id] = item;
+    localStorage.setItem("curbside:favs", JSON.stringify(this.all));
+    return this.has(item.id);
+  },
+};
+
+CATEGORIES.forEach(([v, label]) => $("cat").add(new Option(label, v)));
+
+fetch("cities.json").then((r) => r.json()).then((cities) => {
+  const dl = $("cities");
+  for (const c of cities) dl.append(new Option(c.name, c.slug));
+}).catch(() => {}); // the city box still accepts a typed slug without the list
+
+const ago = (secs) => {
+  const m = Math.max(0, (Date.now() / 1000 - secs) / 60);
+  if (m < 60) return `${Math.round(m)}m ago`;
+  if (m < 1440) return `${Math.round(m / 60)}h ago`;
+  return `${Math.round(m / 1440)}d ago`;
+};
+
+function card(item) {
+  const li = document.createElement("li");
+  li.className = "card cardwrap";
+
+  const open = document.createElement("button");
+  open.className = "open";
+  open.type = "button";
+  open.addEventListener("click", () => showDetail(item));
+
+  if (item.thumb) {
+    const img = document.createElement("img");
+    img.src = item.thumb;
+    img.loading = "lazy";
+    img.alt = "";
+    open.append(img);
+  } else {
+    const ph = document.createElement("div");
+    ph.className = "noimg";
+    ph.textContent = "No photo";
+    open.append(ph);
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "meta";
+  // textContent throughout: every string below is written by a stranger.
+  const price = document.createElement("span");
+  price.className = "price";
+  price.textContent = item.priceString || "—";
+  const title = document.createElement("span");
+  title.className = "title";
+  title.textContent = item.title;
+  const sub = document.createElement("span");
+  sub.className = "sub";
+  sub.textContent = [item.location, ago(item.postedDate)].filter(Boolean).join(" · ");
+  meta.append(price, title, sub);
+  open.append(meta);
+
+  const star = document.createElement("button");
+  star.className = "star";
+  star.type = "button";
+  star.textContent = "★";
+  star.setAttribute("aria-label", "Save listing");
+  star.setAttribute("aria-pressed", String(favs.has(item.id)));
+  star.addEventListener("click", (e) => {
+    e.stopPropagation();
+    star.setAttribute("aria-pressed", String(favs.toggle(item)));
+    if (showingFavs) render(Object.values(favs.all), true);
+  });
+
+  li.append(open, star);
+  return li;
+}
+
+function render(items, reset) {
+  if (reset) { grid.replaceChildren(); shown = 0; results = items; }
+  const next = results.slice(shown, shown + PAGE);
+  for (const it of next) grid.append(card(it));
+  shown += next.length;
+  $("more").hidden = shown >= results.length;
+}
+
+async function showDetail(item) {
+  $("dtitle").textContent = item.title;
+  $("dsub").textContent = [item.priceString, item.location].filter(Boolean).join(" · ");
+  $("dlink").href = item.url;
+  $("dshots").replaceChildren();
+  $("dattrs").replaceChildren();
+  $("dtext").textContent = "Loading…";
+  $("detail").showModal();
+
+  try {
+    const d = await (await fetch(`${API}/api/post/${encodeURIComponent(item.uuid)}`)).json();
+    if (d.error) throw new Error(d.error);
+    $("dtext").textContent = d.body || "No description.";
+    if (d.url) $("dlink").href = d.url;
+    for (const src of d.images || []) {
+      const img = document.createElement("img");
+      img.src = src; img.alt = ""; img.loading = "lazy";
+      $("dshots").append(img);
+    }
+    for (const a of d.attributes || []) {
+      const li = document.createElement("li");
+      li.textContent = `${a.label}: ${a.value}`;
+      $("dattrs").append(li);
+    }
+  } catch (e) {
+    $("dtext").textContent = "Couldn't load this posting. Open the original instead.";
+  }
+}
+
+$("dclose").addEventListener("click", () => $("detail").close());
+$("more").addEventListener("click", () => render(results, false));
+$("toggle").addEventListener("click", () => {
+  const open = $("filters").hidden;
+  $("filters").hidden = !open;
+  $("toggle").setAttribute("aria-expanded", String(open));
+});
+
+$("favbtn").addEventListener("click", () => {
+  showingFavs = !showingFavs;
+  $("favbtn").setAttribute("aria-pressed", String(showingFavs));
+  if (showingFavs) {
+    const saved = Object.values(favs.all);
+    status.textContent = saved.length ? `${saved.length} saved` : "Nothing saved yet.";
+    render(saved, true);
+  } else {
+    status.textContent = "Search to begin.";
+    render([], true);
+  }
+});
+
+$("f").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  showingFavs = false;
+  $("favbtn").setAttribute("aria-pressed", "false");
+
+  const p = new URLSearchParams({ city: $("city").value.trim() || "vancouver", cat: $("cat").value });
+  if ($("q").value.trim()) p.set("q", $("q").value.trim());
+  for (const k of ["min_price", "max_price", "postal", "search_distance", "sort"]) {
+    if ($(k).value) p.set(k, $(k).value);
+  }
+  if ($("hasPic").checked) p.set("hasPic", "1");
+
+  status.textContent = "Searching…";
+  grid.replaceChildren();
+  $("more").hidden = true;
+  try {
+    const d = await (await fetch(`${API}/api/search?${p}`)).json();
+    if (d.error) { status.textContent = d.error; return; }
+    status.textContent = d.total
+      ? `${d.total.toLocaleString()} results in ${d.location?.city || $("city").value}`
+      : "No results.";
+    render(d.items, true);
+  } catch {
+    status.textContent = "Couldn't reach the server.";
+  }
+});
+
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>

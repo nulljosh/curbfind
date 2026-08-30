@@ -1,4 +1,5 @@
-import { decodeSearch } from "./decode.js";
+import { decodeSearch, sanitizeBody } from "./decode.js";
+import SEED from "../data/areas.json";
 
 const SAPI = "https://sapi.craigslist.org/web/v8/postings";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
@@ -9,12 +10,14 @@ const PAGE = 360;
 // Craigslist publishes no area directory, so read the id off the city's own
 // search page once and keep it forever -- these never change.
 async function areaId(city, env) {
+  if (SEED[city]) return SEED[city];
   const key = `area:${city}`;
   const hit = await env.AREAS.get(key);
   if (hit) return Number(hit);
   const res = await fetch(`https://www.craigslist.org/search/area/${encodeURIComponent(city)}`, {
     headers: { "User-Agent": UA },
   });
+  if (!res.ok) return null; // craigslist 404s cleanly on an unknown slug
   const id = (await res.text()).match(/"areaId":(\d+)/)?.[1];
   if (!id) return null;
   await env.AREAS.put(key, id);
@@ -66,6 +69,8 @@ async function post(uuid) {
   if (!item) return json({ error: payload.errors?.[0]?.message || "not found" }, 404);
   return json({
     ...item,
+    // Never ship the raw HTML onward -- see sanitizeBody in decode.js.
+    body: sanitizeBody(item.body),
     images: (item.images || []).map((t) => `https://images.craigslist.org/${t.replace(/^\d+:/, "")}_600x450.jpg`),
   });
 }

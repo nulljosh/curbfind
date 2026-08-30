@@ -1,0 +1,87 @@
+/* Jaybulb design system — canonical tokens. Derived from maybulb.com. */
+/* Signature: #ffca30 as a solid block, black on white, square corners, no shadows. */
+/* Consumed by heyitsmejosh.com and every app site: <link href="https://heyitsmejosh.com/tokens.css"> */
+/* Past themes live in themes/. Don't add a new one — edit this. */
+
+:root{
+  /* accent */
+  --bulb:#ffca30;
+  --bulb-deep:#b08300;      /* accessible yellow for text on white */
+  --accent:var(--bulb);
+  --accent-dot:var(--bulb);
+
+  /* surface + ink */
+  --color-bg:#ffffff;
+  --color-bg2:#faf8f3;
+  --color-text:#000000;
+  --color-secondary:rgba(0,0,0,0.50);
+  --color-soft:rgba(0,0,0,0.67);
+  --color-hairline:#f0e2b8;
+  --color-hairline-strong:var(--bulb);
+  --color-underline:var(--bulb);
+  --color-underline-hover:var(--bulb-deep);
+  --color-code-bg:#faf8f3;
+
+  /* aliases for older consumers */
+  --bg:var(--color-bg);
+  --bg2:var(--color-bg2);
+  --text:var(--color-text);
+  --text2:var(--color-secondary);
+  --text3:rgba(0,0,0,0.30);
+  --border:var(--color-hairline);
+  --border2:var(--color-bg2);
+
+  /* type — sans everywhere: San Francisco on Apple, Helvetica off it.
+     No webfonts, no Typekit names, and never a bare generic keyword at the
+     end of a chain, which hands the choice to the reader's browser default. */
+  --font-body:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-serif:var(--font-body);
+  --font-code:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+
+  /* geometry — maybulb is square everywhere */
+  --radius:0;
+  --radius-sm:0;
+  --radius-md:0;
+  --radius-lg:0;
+  --radius-pill:0;
+  --rule:2px solid var(--bulb);
+  --column-width:36.375rem;
+
+  /* no shadows: maybulb uses flat blocks. Kept as no-ops so consumers don't break. */
+  --shadow-sm:none;
+  --shadow-md:none;
+  --shadow-lg:none;
+
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* Dark: maybulb has no dark mode. Ink inverts, the bulb does not. */
+[data-theme="dark"]{
+  --color-bg:#0d0d0d;
+  --color-bg2:#171717;
+  --color-text:#f5f2ea;
+  --color-secondary:rgba(245,242,234,0.50);
+  --color-soft:rgba(245,242,234,0.67);
+  --color-hairline:rgba(255,202,48,0.22);
+  --color-underline:rgba(255,202,48,0.55);
+  --color-underline-hover:var(--bulb);
+  --color-code-bg:#171717;
+  --bulb-deep:var(--bulb);
+  --text3:rgba(245,242,234,0.30);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --color-bg:#0d0d0d;
+    --color-bg2:#171717;
+    --color-text:#f5f2ea;
+    --color-secondary:rgba(245,242,234,0.50);
+    --color-soft:rgba(245,242,234,0.67);
+    --color-hairline:rgba(255,202,48,0.22);
+    --color-underline:rgba(255,202,48,0.55);
+    --color-underline-hover:var(--bulb);
+    --color-code-bg:#171717;
+    --bulb-deep:var(--bulb);
+    --text3:rgba(245,242,234,0.30);
+  }
+}

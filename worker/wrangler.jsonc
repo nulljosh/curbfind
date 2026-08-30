@@ -2,7 +2,7 @@
   "name": "curbside-api",
   "main": "worker.js",
   "compatibility_date": "2025-07-01",
-  "kv_namespaces": [{ "binding": "AREAS", "id": "REPLACE_WITH_KV_ID" }],
+  "kv_namespaces": [{ "binding": "AREAS", "id": "26d7e1bfbfb5452e8ae05f8696db4a75" }],
   // ponytail: native Cloudflare rate limiting instead of a hand-rolled Map --
   // the endpoint is public and every request hits an undocumented upstream.
   "unsafe": {

@@ -34,3 +34,25 @@ test("free postings have no price, not -1", () => {
   const free = items.find((i) => i.priceString === "free");
   assert.equal(free.price, null);
 });
+
+import { sanitizeBody } from "./decode.js";
+
+test("sanitizeBody strips markup and keeps line structure", () => {
+  assert.equal(sanitizeBody("a<br>\nb"), "a\nb");
+  assert.equal(sanitizeBody("<p>one</p><p>two</p>"), "one\n\ntwo");
+  assert.equal(sanitizeBody("Tom &amp; Jerry &quot;hi&quot;"), 'Tom & Jerry "hi"');
+  assert.equal(sanitizeBody(null), "");
+});
+
+test("sanitizeBody defuses a hostile posting body", () => {
+  const hostile = `<img src=x onerror="alert(1)"><script>steal()</script>call me`;
+  const out = sanitizeBody(hostile);
+  assert.ok(!out.includes("<"), out);
+  assert.ok(!out.includes("onerror"), out);
+  assert.ok(out.endsWith("call me"));
+});
+
+test("the real fixture body survives sanitising as readable text", () => {
+  const body = "Sleek desk<br>\nWidth: 120 cm<br>\nPrice: $70\n";
+  assert.equal(sanitizeBody(body), "Sleek desk\nWidth: 120 cm\nPrice: $70");
+});

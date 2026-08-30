@@ -1,0 +1,9 @@
+{
+  "name": "Curbside",
+  "short_name": "Curbside",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffca30",
+  "description": "A faster way to browse local classifieds."
+}
