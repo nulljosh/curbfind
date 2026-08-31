@@ -51,7 +51,15 @@ dialog::backdrop{background:rgba(0,0,0,.55)}
 footer{padding:18px 16px;border-top:1px solid var(--border);font-size:13px;color:var(--text2)}
 footer a{color:inherit}
 </style>
-</head>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Curbside">
+    <meta property="og:title" content="Curbside">
+    <meta property="og:description" content="A faster way to browse local classifieds.">
+    <meta property="og:url" content="https://curbside.heyitsmejosh.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Curbside">
+    <meta name="twitter:description" content="A faster way to browse local classifieds.">
+  </head>
 <body>
 <header>
   <p class="brand"><b>Curbside</b></p>
@@ -281,6 +289,27 @@ $("f").addEventListener("submit", async (e) => {
 });
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+
+<!-- share -->
+<style>
+#share-btn{position:fixed;right:16px;bottom:16px;z-index:9999;border:1px solid rgba(128,128,128,.35);
+background:Canvas;color:CanvasText;font:inherit;font-size:14px;padding:8px 14px;border-radius:999px;
+cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+#share-btn:hover{border-color:rgba(128,128,128,.6)}
+@media print{#share-btn{display:none}}
+</style>
+<button id="share-btn" type="button">Share</button>
+<script>
+(function(){
+  var b=document.getElementById('share-btn');
+  b.addEventListener('click',function(){
+    var d={title:document.title,text:(document.querySelector('meta[name=description]')||{}).content||'',url:location.href};
+    if(navigator.share)navigator.share(d).catch(function(){});
+    else if(navigator.clipboard)navigator.clipboard.writeText(location.href).then(function(){
+      b.textContent='Link copied';setTimeout(function(){b.textContent='Share'},1600);});
+  });
+})();
 </script>
 </body>
 </html>
