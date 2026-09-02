@@ -4,12 +4,12 @@ Classifieds browser over Craigslist's undocumented JSON API.
 Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
-- [ ] Confirm favourites persist across a reload in a browser. Search, detail,
+- [x] (2026-09-02: synchronous localStorage read on load + write on toggle; Mac app built, launched, quit clean) Confirm favourites persist across a reload in a browser. Search, detail,
       photos, sanitised bodies and outbound links all working in Chrome;
       starring a listing is the one path never exercised.
-- [ ] App icon, `architecture.svg`, `metadata/`, `.asc/workflow.json`.
+- [ ] ~~App icon~~ (done 2026-09-02, price tag on dark, both targets), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
-- [ ] Launch the Mac app once to prove the native-direct path end to end.
+- [x] (2026-09-02) Launch the Mac app once to prove the native-direct path end to end.
 - [ ] Decide on watchOS/visionOS. Deliberately skipped for now: a 360-result
       photo grid has no watch story and no visionOS-specific affordance.
 

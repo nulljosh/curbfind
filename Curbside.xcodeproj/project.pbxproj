@@ -24,6 +24,7 @@
 		99B3E0E175793DA05754322A /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = B364CD0E19CE0CDAFFCBED5F /* areas.json */; };
 		A7FA0B684FECED90C7673A3F /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */; };
 		AD439F23813D49403055C36B /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED7CAC948A28A15D23675DC /* Favorites.swift */; };
+		BB576A0B9A593913DB36AB8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88486785E87E1BA5F0B5D748 /* Assets.xcassets */; };
 		BE00B492610804A73BD2A9D3 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A2C62B630D817210E8481 /* Cities.swift */; };
 		BFF0AB6E35A68054670A1EAD /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A2C62B630D817210E8481 /* Cities.swift */; };
 		C1D87352442BC941B0B7B354 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED7CAC948A28A15D23675DC /* Favorites.swift */; };
@@ -34,6 +35,7 @@
 		E73B5A7C5201B9F0A836CE9E /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = B364CD0E19CE0CDAFFCBED5F /* areas.json */; };
 		E8682776BBB0F8728F6F9C6B /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BEEE03F055A04BD95980C0 /* ListingDetailView.swift */; };
 		EC8E05732B3BF286F7597A7F /* CraigslistAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB8EA68F91C895AFE08446 /* CraigslistAPITests.swift */; };
+		FDA7A2FFE9E08FFE95B18709 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88486785E87E1BA5F0B5D748 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,7 @@
 		5AAE15970FD51C028A781A06 /* Curbside-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Curbside-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D4EB346E4D683E6EBD2D43 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
 		770980ECC0FDCF167E7D1405 /* CurbsideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurbsideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88486785E87E1BA5F0B5D748 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BDE24E645C34AEA1A96A7C0 /* ResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
 		AED7CAC948A28A15D23675DC /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
 		B364CD0E19CE0CDAFFCBED5F /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areas.json; sourceTree = "<group>"; };
@@ -133,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				B364CD0E19CE0CDAFFCBED5F /* areas.json */,
+				88486785E87E1BA5F0B5D748 /* Assets.xcassets */,
 				1BDBA4034C274A7C38EDA826 /* cities.json */,
 				33F92341DD4A20ABB27A5E45 /* Curbside.entitlements */,
 				E285A0E535F8ACEEBD82BDA7 /* search-fixture.json */,
@@ -261,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB576A0B9A593913DB36AB8C /* Assets.xcassets in Resources */,
 				99B3E0E175793DA05754322A /* areas.json in Resources */,
 				08893E7D8CF0917B96BD9F5A /* cities.json in Resources */,
 				3A58641731AD6F327F097DA5 /* search-fixture.json in Resources */,
@@ -279,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA7A2FFE9E08FFE95B18709 /* Assets.xcassets in Resources */,
 				245B99A72B4191D410FB85D4 /* Curbside.entitlements in Resources */,
 				E73B5A7C5201B9F0A836CE9E /* areas.json in Resources */,
 				5E4E8A6DD5BF9F6A355B75D2 /* cities.json in Resources */,

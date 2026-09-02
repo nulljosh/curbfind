@@ -25,6 +25,8 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.curbside
         PRODUCT_NAME: Curbside
         ENABLE_HARDENED_RUNTIME: YES
+        # Without this the Mac build is iconless; iOS auto-detects.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         # Missing LSApplicationCategoryType is the real cause of ITMS-90242.
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
@@ -46,6 +48,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.curbside.ios
         PRODUCT_NAME: Curbside
         TARGETED_DEVICE_FAMILY: "1,2"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         # Hand-written plist purely because UILaunchScreen is a dict and no
         # INFOPLIST_KEY_* can express it; without it the app runs letterboxed.
         INFOPLIST_FILE: Curbside-iOS-Info.plist
