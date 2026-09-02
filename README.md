@@ -1,41 +1,32 @@
 # Curbside
 
-A faster way to browse local classifieds. Web, iOS and macOS.
+![version](https://img.shields.io/badge/version-v1.0.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fcurbside-black?logo=github)](https://github.com/nulljosh/curbside)
 
-| Platform | Status | Talks to |
-|---|---|---|
-| Web | live — https://curbside.heyitsmejosh.com | Cloudflare Worker (CORS leaves no choice) |
-| iOS | builds | Craigslist directly, no server |
-| macOS | builds | Craigslist directly, no server |
+**Live:** https://curbside.heyitsmejosh.com
 
-## How it works
+Craigslist, without the 2003.
 
-Craigslist blocks scraped HTML and RSS, but its own site runs on an undocumented
-JSON API at `sapi.craigslist.org` that takes no auth, sets no cookies and ignores
-User-Agent entirely. The native apps call it straight from `URLSession`. Only the
-web app needs the Worker, because browsers enforce CORS and the API sends no
-CORS headers.
+Pick a city. Search. Read the post. Save the ones you like. That's the whole app, on the web and native on iPhone and Mac.
 
-Search results come back as bare positional arrays against a per-response
-dictionary. `worker/decode.js` and `Sources/Models/CraigslistAPI.swift` are two
-ports of the same decoder, both pinned by `worker/fixtures/search.json` so they
-cannot drift apart silently.
+## Features
 
-## Build
+- Any Craigslist city, found by name
+- Search results the way they should look: image, price, title, place
+- Favourites, kept on your device and nowhere else
+- Native iOS and macOS apps that talk to Craigslist directly. No server in between
+- A Cloudflare Worker for the web version, cached five minutes
+
+## Run
 
 ```sh
-cd worker && node --test        # decoder + sanitiser  (not from the repo root)
-./scripts/build-site.sh         # docs -> /, web -> /app
-npx wrangler deploy --config worker/wrangler.jsonc
-xcodegen && xcodebuild -scheme Curbside -destination 'platform=macOS' build
+cd worker && node --test decode.test.mjs && npx wrangler dev
+xcodegen generate && open Curbside.xcodeproj
 ```
 
-`scripts/fetch-cities.mjs` regenerates `data/cities.json` from Craigslist's
-public site list. `data/areas.json` seeds 41 area ids; the rest resolve lazily
-and cache (KV on the Worker, `UserDefaults` on native).
+## License
 
-## Not affiliated with craigslist
+MIT 2026 Joshua Trommel
 
-Curbside reads public listings and links every reply back to the original
-posting. It is not affiliated with, endorsed by, or connected to craigslist, and
-carries none of their branding.
+## Whitepaper
+
+[Technical whitepaper](WHITEPAPER.md)
