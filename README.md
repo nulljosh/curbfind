@@ -6,7 +6,7 @@
 
 <img src="docs/icon.svg" width="72" alt="">
 
-![Curbside web app showing Vancouver for-sale listings](docs/screenshot.png)
+![Curbside web app showing Vancouver for-sale listings](docs/screenshot.jpg)
 
 Craigslist, without the 2003.
 
