@@ -19,7 +19,7 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 - `cc` is ignored upstream; any page size but 360 is rejected.
 - Posting bodies are stranger-authored HTML. Both decoders strip them to plain
   text; nothing may ever render them as markup.
-- Craigslist does **not** block Cloudflare egress — verified against the live
+- Craigslist does **not** block Cloudflare egress, verified against the live
   deployed Worker.
 - Nothing ships under Craigslist's name. They hold the mark and have sued
   third-party clients before.
