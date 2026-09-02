@@ -33,6 +33,7 @@ struct RootView: View {
             .navigationDestination(for: Listing.self) { ListingDetailView(listing: $0) }
             .searchable(text: $model.filters.query, prompt: "Search listings")
             .onSubmit(of: .search) { Task { await model.run() } }
+            .task { await model.run() }
             .toolbar { filterButton }
             .sheet(isPresented: $showingFilters) { filterSheet }
     }

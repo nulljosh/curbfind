@@ -21,7 +21,7 @@ struct ListingRow: View {
             Rectangle().fill(.quaternary)
         }
         .frame(width: 84, height: 84)
-        .clipped()
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
     }
 
     private var details: some View {

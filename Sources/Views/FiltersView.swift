@@ -8,13 +8,17 @@ struct FiltersView: View {
 
     var body: some View {
         Form {
+            #if os(macOS)
+            // iOS gets this from .searchable on the results list.
+            Section { TextField("Search listings", text: $filters.query) }
+            #endif
             Section("Where") {
+                TextField("Find a city", text: $cityQuery)
                 Picker("City", selection: $filters.city) {
                     ForEach(City.matching(cityQuery)) { city in
                         Text(city.name).tag(city.slug)
                     }
                 }
-                TextField("Find a city", text: $cityQuery)
                 TextField("Postal or ZIP", text: $filters.postal)
                 TextField("Distance (km)", text: $filters.distance)
             }
@@ -30,6 +34,8 @@ struct FiltersView: View {
                 }
             }
             Button("Search", action: onSearch)
+                .keyboardShortcut(.defaultAction)
         }
+        .onSubmit(onSearch)
     }
 }

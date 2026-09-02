@@ -41,7 +41,9 @@ struct MacRootView: View {
             .navigationSplitViewColumnWidth(min: 300, ideal: 340)
             .toolbar {
                 Toggle(isOn: $showingSaved) { Label("Saved", systemImage: "star") }
+                    .toggleStyle(.button)
             }
+            .task { await model.run() }
     }
 
     @ViewBuilder private var detail: some View {
