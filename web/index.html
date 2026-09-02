@@ -6,6 +6,8 @@
 <title>Curbside</title>
 <meta name="description" content="A faster way to browse local classifieds.">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="stylesheet" href="tokens.css">
 <style>
 *{box-sizing:border-box}
@@ -52,6 +54,7 @@ footer{padding:18px 16px;border-top:1px solid var(--border);font-size:13px;color
 footer a{color:inherit}
 </style>
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://curbside.heyitsmejosh.com/icon-512.png">
     <meta property="og:site_name" content="Curbside">
     <meta property="og:title" content="Curbside">
     <meta property="og:description" content="A faster way to browse local classifieds.">
@@ -261,6 +264,7 @@ $("favbtn").addEventListener("click", () => {
   }
 });
 
+addEventListener("DOMContentLoaded", () => $("f").requestSubmit());
 $("f").addEventListener("submit", async (e) => {
   e.preventDefault();
   showingFavs = false;

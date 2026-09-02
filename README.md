@@ -4,6 +4,10 @@
 
 **Live:** https://curbside.heyitsmejosh.com
 
+<img src="docs/icon.svg" width="72" alt="">
+
+![Curbside web app showing Vancouver for-sale listings](docs/screenshot.png)
+
 Craigslist, without the 2003.
 
 Pick a city. Search. Read the post. Save the ones you like. That's the whole app, on the web and native on iPhone and Mac.
