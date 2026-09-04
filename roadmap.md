@@ -6,6 +6,13 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 ## Open
 - [ ] ~~App icon~~ (done 2026-09-02, price tag on dark, both targets), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
+      2026-09-03: public search shows no exact "Curbside" match but many close
+      variants exist (Curbside Waste, Curbside Health, etc) — exact-match ASC
+      probe still needed, not done. iOS target already builds clean, so this
+      app is closer to submit-ready than Roost.
+- [ ] OfferUp reviews complain about off-platform scam redirects and bans with
+      no recourse. Curbside (browser, no payments) sidesteps that class of
+      complaint entirely — worth a line in store copy once listed.
 - [ ] Decide on watchOS/visionOS. Deliberately skipped for now: a 360-result
       photo grid has no watch story and no visionOS-specific affordance.
 
