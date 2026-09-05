@@ -40,6 +40,7 @@ label.chk{display:flex;gap:5px;align-items:center;font-size:14px;color:var(--tex
 .price{font-weight:700}
 .title{font-size:14px}
 .sub{font-size:12.5px;color:var(--text2)}
+.sub.deal{color:var(--accent);font-weight:600}
 .star{position:absolute;top:6px;right:6px;background:var(--bg);border:1px solid var(--text);width:30px;height:30px;line-height:1;font-size:15px;padding:0}
 .star[aria-pressed=true]{background:var(--curb);border-color:var(--curb);color:#fff}
 .cardwrap{position:relative}
@@ -86,6 +87,7 @@ footer a{color:inherit}
       <input class="narrow" id="search_distance" type="number" min="1" placeholder="km" aria-label="Distance">
       <select id="sort" aria-label="Sort">
         <option value="rel">Best match</option>
+        <option value="deal">Best deals (AI)</option>
         <option value="date">Newest</option>
         <option value="priceasc">Price: low to high</option>
         <option value="pricedsc">Price: high to low</option>
@@ -193,6 +195,12 @@ function card(item) {
   sub.className = "sub";
   sub.textContent = [item.location, ago(item.postedDate)].filter(Boolean).join(" · ");
   meta.append(price, title, sub);
+  if (item.dealReason) {
+    const reason = document.createElement("span");
+    reason.className = "sub deal";
+    reason.textContent = item.dealReason;
+    meta.append(reason);
+  }
   open.append(meta);
 
   const star = document.createElement("button");

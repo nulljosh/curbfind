@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,12 +46,14 @@ fun SearchScreen(modifier: Modifier = Modifier) {
     var results by remember { mutableStateOf<List<Listing>>(emptyList()) }
     var status by remember { mutableStateOf("Search to begin.") }
     var loading by remember { mutableStateOf(false) }
+    var dealSort by remember { mutableStateOf(false) }
 
     fun submit() {
         loading = true
         status = "Searching…"
         scope.launch {
-            client.search(SearchFilters(query = query.trim(), city = city.trim().ifBlank { "vancouver" }))
+            val sort = if (dealSort) "deal" else "rel"
+            client.search(SearchFilters(query = query.trim(), city = city.trim().ifBlank { "vancouver" }, sort = sort))
                 .onSuccess { r ->
                     results = r.items
                     status = if (r.total > 0) "${r.total} results in ${r.cityName ?: city}" else "No results."
@@ -86,6 +89,13 @@ fun SearchScreen(modifier: Modifier = Modifier) {
             Button(onClick = { submit() }) { Text("Search") }
         }
 
+        Spacer(Modifier.height(8.dp))
+        Row {
+            Text("Sort by best deals (AI)", fontSize = 13.sp)
+            Spacer(Modifier.width(8.dp))
+            Switch(checked = dealSort, onCheckedChange = { dealSort = it; submit() })
+        }
+
         Spacer(Modifier.height(12.dp))
         Text(status, fontSize = 13.sp, color = Color.Gray)
         Spacer(Modifier.height(8.dp))
@@ -113,6 +123,7 @@ private fun ListingRow(listing: Listing) {
             fontSize = 12.sp,
             color = Color.Gray,
         )
+        listing.dealReason?.let { Text(it, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Curb) }
     }
     HorizontalDivider()
 }

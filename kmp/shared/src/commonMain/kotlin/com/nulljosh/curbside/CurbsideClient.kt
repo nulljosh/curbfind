@@ -22,6 +22,7 @@ data class Listing(
     val thumb: String? = null,
     val images: List<String> = emptyList(),
     val url: String? = null,
+    val dealReason: String? = null,
 )
 
 @Serializable

@@ -45,7 +45,7 @@ final class SearchModel: ObservableObject {
         message = nil
         defer { isLoading = false }
         do {
-            let results = try await api.search(filters)
+            let results = filters.sort == "deal" ? try await api.searchDeals(filters) : try await api.search(filters)
             listings = results.listings
             total = results.total
             message = results.listings.isEmpty ? "No results." : nil

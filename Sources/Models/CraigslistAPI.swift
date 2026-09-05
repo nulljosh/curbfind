@@ -62,6 +62,52 @@ struct CraigslistAPI {
         return try Self.decodeSearch(data)
     }
 
+    // MARK: - Deal ranking (AI)
+    //
+    // The only path in this file that isn't a direct-to-Craigslist call: the
+    // AI reasoning behind "Best deals" runs on Workers AI, which only the
+    // curbside-api worker has a binding to. Everything else stays native.
+    private static let workerAPI = "https://curbside-api.trommatic.workers.dev"
+
+    private struct WorkerSearchResponse: Decodable {
+        let items: [WorkerItem]
+        let total: Int
+        let location: Loc?
+        struct Loc: Decodable { let city: String? }
+    }
+
+    private struct WorkerItem: Decodable {
+        let id: Int, uuid: String?, title: String, slug: String?
+        let price: Int?, priceString: String?, postedDate: Double
+        let location: String?, lat: Double?, lon: Double?
+        let images: [String], dealReason: String?
+    }
+
+    func searchDeals(_ f: SearchFilters, offset: Int = 0) async throws -> SearchResults {
+        var q = [URLQueryItem(name: "city", value: f.city), .init(name: "cat", value: f.category),
+                 .init(name: "sort", value: "deal"), .init(name: "offset", value: "\(offset)")]
+        if !f.query.isEmpty { q.append(.init(name: "q", value: f.query)) }
+        if !f.minPrice.isEmpty { q.append(.init(name: "min_price", value: f.minPrice)) }
+        if !f.maxPrice.isEmpty { q.append(.init(name: "max_price", value: f.maxPrice)) }
+        if !f.postal.isEmpty { q.append(.init(name: "postal", value: f.postal)) }
+        if !f.distance.isEmpty { q.append(.init(name: "search_distance", value: f.distance)) }
+        if f.hasPhoto { q.append(.init(name: "hasPic", value: "1")) }
+
+        var comps = URLComponents(string: "\(Self.workerAPI)/api/search")!
+        comps.queryItems = q
+
+        let (data, _) = try await session.data(from: comps.url!)
+        let decoded = try JSONDecoder().decode(WorkerSearchResponse.self, from: data)
+        let listings = decoded.items.compactMap { i -> Listing? in
+            guard let uuid = i.uuid else { return nil }
+            return Listing(id: i.id, uuid: uuid, title: i.title, slug: i.slug, price: i.price,
+                           priceString: i.priceString, postedDate: Date(timeIntervalSince1970: i.postedDate),
+                           location: i.location, lat: i.lat, lon: i.lon, images: i.images,
+                           dealReason: i.dealReason)
+        }
+        return SearchResults(listings: listings, total: decoded.total, cityName: decoded.location?.city)
+    }
+
     // MARK: - Decoding
     //
     // Search results arrive as bare positional arrays against a per-response

@@ -12,6 +12,7 @@ struct Listing: Identifiable, Hashable, Codable {
     let lat: Double?
     let lon: Double?
     let images: [String]
+    var dealReason: String? = nil
 
     var thumbURL: URL? { images.first.flatMap { URL(string: $0 + "_300x300.jpg") } }
     var imageURLs: [URL] { images.compactMap { URL(string: $0 + "_600x450.jpg") } }
@@ -61,6 +62,6 @@ struct SearchFilters: Equatable {
     var hasPhoto = false
     var sort = "rel"
 
-    static let sorts = [("rel", "Best match"), ("date", "Newest"),
+    static let sorts = [("rel", "Best match"), ("deal", "Best deals"), ("date", "Newest"),
                         ("priceasc", "Price: low to high"), ("pricedsc", "Price: high to low")]
 }

@@ -29,6 +29,9 @@ struct ListingRow: View {
             Text(listing.priceString ?? "—").font(.headline)
             Text(listing.title).font(.subheadline).lineLimit(2)
             Text(subtitle).font(.caption).foregroundStyle(.secondary)
+            if let reason = listing.dealReason {
+                Text(reason).font(.caption).fontWeight(.semibold).foregroundStyle(.tint)
+            }
         }
     }
 
