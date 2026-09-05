@@ -4,6 +4,8 @@
 
 **Live:** https://curbside.heyitsmejosh.com
 
+**Terminal:** `swift build && ./.build/debug/curbside-tui "bike" vancouver` — see [tui/](tui/)
+
 <img src="docs/icon.svg" width="72" alt="">
 
 ![Curbside web app showing Vancouver for-sale listings](docs/screenshot.jpg)
