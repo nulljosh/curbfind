@@ -26,3 +26,6 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
   deployed Worker.
 - Nothing ships under Craigslist's name. They hold the mark and have sued
   third-party clients before.
+
+## TUI pilot (2026-09-05)
+- `curbside-tui` SwiftPM target (SwiftTUI). `swift build && ./.build/debug/curbside-tui "bike" vancouver` reuses CraigslistAPI.swift as-is, same client the native apps use. Needs a real TTY.

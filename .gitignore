@@ -5,3 +5,4 @@ dist/
 Curbside.xcodeproj/xcuserdata/
 *.xcarchive
 build/
+.build/
