@@ -67,7 +67,7 @@ export async function addDealReasons(items, env) {
   // title can do is waste the model's own output on a useless reason.
   const list = top.map((i) => `${i.id}: "${i.title.slice(0, 200).replace(/"/g, "'")}" - ${i.priceString}`).join("\n");
   try {
-    const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
       messages: [{
         role: "user",
         content: `These are classifieds listings, cheapest-relative-to-market first. In one short punchy phrase each (under 8 words), say why it looks like a good deal. Reply as JSON only, no other text: {"id": "reason"}.\n\n${list}`,
@@ -82,8 +82,9 @@ export async function addDealReasons(items, env) {
       }
     }
     return items.map((i) => (reasons[i.id] ? { ...i, dealReason: reasons[i.id] } : i));
-  } catch {
-    return items; // ponytail: AI is a garnish here, not load-bearing
+  } catch (err) {
+    console.error("addDealReasons:", err); // ponytail: AI is a garnish, not load-bearing -- log and move on
+    return items;
   }
 }
 
