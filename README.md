@@ -1,14 +1,14 @@
-# Curbside
+# Curbfind
 
 ![version](https://img.shields.io/badge/version-v1.0.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fcurbside-black?logo=github)](https://github.com/nulljosh/curbside)
 
-**Live:** https://curbside.heyitsmejosh.com
+**Live:** https://curbfind.heyitsmejosh.com
 
 **Terminal:** `swift build && ./.build/debug/curbside-tui "bike" vancouver` — see [tui/](tui/)
 
 <img src="docs/icon.svg" width="80" alt="">
 
-![Curbside web app showing Vancouver for-sale listings](docs/screenshot.jpg)
+![Curbfind web app showing Vancouver for-sale listings](docs/screenshot.jpg)
 
 Craigslist, without the 2003.
 
@@ -26,7 +26,7 @@ Pick a city. Search. Read the post. Save the ones you like. That's the whole app
 
 ```sh
 cd worker && node --test decode.test.mjs && npx wrangler dev
-xcodegen generate && open Curbside.xcodeproj
+xcodegen generate && open Curbfind.xcodeproj
 ```
 
 ## License

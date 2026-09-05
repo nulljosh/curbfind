@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct CurbsideApp: App {
+struct CurbfindApp: App {
     @StateObject private var favorites = Favorites()
 
     var body: some Scene {
@@ -29,7 +29,7 @@ struct RootView: View {
 
     private var browse: some View {
         ResultsList(model: model, selection: $selection, savedOnly: nil)
-            .navigationTitle("Curbside")
+            .navigationTitle("Curbfind")
             .navigationDestination(for: Listing.self) { ListingDetailView(listing: $0) }
             .searchable(text: $model.filters.query, prompt: "Search listings")
             .onSubmit(of: .search) { Task { await model.run() } }

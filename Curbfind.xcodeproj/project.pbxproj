@@ -1,0 +1,626 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A7948831A2942D5B072FC87 /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD9A281A3EE5267B2ED32A /* ResultsList.swift */; };
+		0DD29450F9993124FEEEAC7C /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D420CDBD6625A9A4A41FEBE /* ListingDetailView.swift */; };
+		0E99D986295F92BDFCA8457E /* CurbfindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A260CCCA0A592BF4D8682330 /* CurbfindApp.swift */; };
+		24E0ECFE4B624E032950C721 /* ListingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C954B07B45D127CCB9998D6C /* ListingRow.swift */; };
+		26980B5C1E7D80080D1DA354 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = D0AEFB1E74B0795B6304C79F /* areas.json */; };
+		2E42D398C7D072D095670B06 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D420CDBD6625A9A4A41FEBE /* ListingDetailView.swift */; };
+		322F2D48CA7845ADC9E49173 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62C96BCD0E920587CC42B8 /* FiltersView.swift */; };
+		3A18840D78BA912ED90E4E89 /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E3857A235F7647CC7C36AAEA /* search-fixture.json */; };
+		40A2FE1251497F51A08274B4 /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33387E2EAE36F96A5B935 /* Cities.swift */; };
+		41CC0B2A17F5D267EB983431 /* Curbfind.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = CBE0730763EC8BCEC9A20B96 /* Curbfind.entitlements */; };
+		4EA9DA2708620C8490E32735 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B433C484CBC35B72F41BA3 /* Favorites.swift */; };
+		6CEBE8D34C9206C197091A2C /* CraigslistAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B01546AEFD5333C205C4DA /* CraigslistAPITests.swift */; };
+		6F3F07E39805814F5CC2DFED /* Cities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A33387E2EAE36F96A5B935 /* Cities.swift */; };
+		7F3D8C5EDC74942075021565 /* areas.json in Resources */ = {isa = PBXBuildFile; fileRef = D0AEFB1E74B0795B6304C79F /* areas.json */; };
+		803545735C5656C1FA2C7C59 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B433C484CBC35B72F41BA3 /* Favorites.swift */; };
+		82312AEE6CBF886CA484CDD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC3206E052C3080DCCCEA20C /* Assets.xcassets */; };
+		8CF6CD9599DCA0D023935A23 /* CraigslistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFD54D78F24AB68F5B71FF /* CraigslistAPI.swift */; };
+		90ED985658ECEFCDE6FE4CCC /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53429F7AB6E74B50C0B56B42 /* Listing.swift */; };
+		AA4DB10EF894DA4B56DDAEE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC3206E052C3080DCCCEA20C /* Assets.xcassets */; };
+		BB578C918583E5609AA5E202 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = ACC890B22438EFAE739B606A /* cities.json */; };
+		C6E136C0A107744405681906 /* Listing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53429F7AB6E74B50C0B56B42 /* Listing.swift */; };
+		C83B6F0DA56C6B6D2A7B5D19 /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E3857A235F7647CC7C36AAEA /* search-fixture.json */; };
+		CA35B715B133BD443449376F /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = ACC890B22438EFAE739B606A /* cities.json */; };
+		D64D9A74A8238BEC298DF325 /* FiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D62C96BCD0E920587CC42B8 /* FiltersView.swift */; };
+		D6D36999E8313709EFAF281E /* CraigslistAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DFD54D78F24AB68F5B71FF /* CraigslistAPI.swift */; };
+		DC741996075F9C513754A41F /* ListingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C954B07B45D127CCB9998D6C /* ListingRow.swift */; };
+		E1A88CA74BDDCCEE3DD25918 /* CurbfindMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075C6B511C4ECB8FB7F61D39 /* CurbfindMacApp.swift */; };
+		EC28AE079AD17B4D01335F5B /* search-fixture.json in Resources */ = {isa = PBXBuildFile; fileRef = E3857A235F7647CC7C36AAEA /* search-fixture.json */; };
+		F5A86A7005F75C77B6870536 /* ResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD9A281A3EE5267B2ED32A /* ResultsList.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		90BC8FBFF6B36948E160F537 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 130F8C60B6A48E621CC0603B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88606DB8B0E606F00F76A9A2;
+			remoteInfo = Curbfind;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		075C6B511C4ECB8FB7F61D39 /* CurbfindMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurbfindMacApp.swift; sourceTree = "<group>"; };
+		11A33387E2EAE36F96A5B935 /* Cities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cities.swift; sourceTree = "<group>"; };
+		47DFD54D78F24AB68F5B71FF /* CraigslistAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraigslistAPI.swift; sourceTree = "<group>"; };
+		52B01546AEFD5333C205C4DA /* CraigslistAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CraigslistAPITests.swift; sourceTree = "<group>"; };
+		53429F7AB6E74B50C0B56B42 /* Listing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Listing.swift; sourceTree = "<group>"; };
+		5D62C96BCD0E920587CC42B8 /* FiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersView.swift; sourceTree = "<group>"; };
+		64B433C484CBC35B72F41BA3 /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		66FE63D5CDF333993274C1AA /* Curbfind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curbfind.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D420CDBD6625A9A4A41FEBE /* ListingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailView.swift; sourceTree = "<group>"; };
+		87DBD079BD491E87A00118C7 /* CurbfindTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurbfindTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A260CCCA0A592BF4D8682330 /* CurbfindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurbfindApp.swift; sourceTree = "<group>"; };
+		ACC890B22438EFAE739B606A /* cities.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		BC3206E052C3080DCCCEA20C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C954B07B45D127CCB9998D6C /* ListingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingRow.swift; sourceTree = "<group>"; };
+		CBE0730763EC8BCEC9A20B96 /* Curbfind.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Curbfind.entitlements; sourceTree = "<group>"; };
+		D0AEFB1E74B0795B6304C79F /* areas.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = areas.json; sourceTree = "<group>"; };
+		E3857A235F7647CC7C36AAEA /* search-fixture.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "search-fixture.json"; sourceTree = "<group>"; };
+		E5BD9A281A3EE5267B2ED32A /* ResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsList.swift; sourceTree = "<group>"; };
+		E729521D6952545CF2DF2479 /* Curbfind-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Curbfind-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		394D4469ED34677E9C688EB0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D62C96BCD0E920587CC42B8 /* FiltersView.swift */,
+				6D420CDBD6625A9A4A41FEBE /* ListingDetailView.swift */,
+				C954B07B45D127CCB9998D6C /* ListingRow.swift */,
+				E5BD9A281A3EE5267B2ED32A /* ResultsList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		645C8E232E4A8FD261E5D7FC /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AAB6295564D9A84EA8C04A99 /* macOS */,
+				E5098620F572BF2C3B746418 /* Models */,
+				394D4469ED34677E9C688EB0 /* Views */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		7784D50656366A7EFA5B15F5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D0AEFB1E74B0795B6304C79F /* areas.json */,
+				BC3206E052C3080DCCCEA20C /* Assets.xcassets */,
+				ACC890B22438EFAE739B606A /* cities.json */,
+				CBE0730763EC8BCEC9A20B96 /* Curbfind.entitlements */,
+				E3857A235F7647CC7C36AAEA /* search-fixture.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		95AED31CA490AFA6544F2499 = {
+			isa = PBXGroup;
+			children = (
+				A92267565DD315652D075704 /* iOS */,
+				7784D50656366A7EFA5B15F5 /* Resources */,
+				645C8E232E4A8FD261E5D7FC /* Sources */,
+				96DAFD61341A4652BB173A31 /* Tests */,
+				EC8C5FFC8316680789C651E6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		96DAFD61341A4652BB173A31 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				52B01546AEFD5333C205C4DA /* CraigslistAPITests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A92267565DD315652D075704 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A260CCCA0A592BF4D8682330 /* CurbfindApp.swift */,
+			);
+			name = iOS;
+			path = Sources/iOS;
+			sourceTree = "<group>";
+		};
+		AAB6295564D9A84EA8C04A99 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				075C6B511C4ECB8FB7F61D39 /* CurbfindMacApp.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		E5098620F572BF2C3B746418 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				11A33387E2EAE36F96A5B935 /* Cities.swift */,
+				47DFD54D78F24AB68F5B71FF /* CraigslistAPI.swift */,
+				64B433C484CBC35B72F41BA3 /* Favorites.swift */,
+				53429F7AB6E74B50C0B56B42 /* Listing.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EC8C5FFC8316680789C651E6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E729521D6952545CF2DF2479 /* Curbfind-iOS.app */,
+				66FE63D5CDF333993274C1AA /* Curbfind.app */,
+				87DBD079BD491E87A00118C7 /* CurbfindTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06620A87BD151222B0659F12 /* Curbfind-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81FA13D411C91F9351E2A80C /* Build configuration list for PBXNativeTarget "Curbfind-iOS" */;
+			buildPhases = (
+				7C43A0F39C7A316D7CFF676D /* Sources */,
+				A465DEE2B1501424E31C2F98 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Curbfind-iOS";
+			packageProductDependencies = (
+			);
+			productName = "Curbfind-iOS";
+			productReference = E729521D6952545CF2DF2479 /* Curbfind-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		88606DB8B0E606F00F76A9A2 /* Curbfind */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA18F6C5E8A2B628FEF91B80 /* Build configuration list for PBXNativeTarget "Curbfind" */;
+			buildPhases = (
+				C6179F339F1E8753461545B8 /* Sources */,
+				E205F18573D45270E95D7CA6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Curbfind;
+			packageProductDependencies = (
+			);
+			productName = Curbfind;
+			productReference = 66FE63D5CDF333993274C1AA /* Curbfind.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A550B8B94551FBB5006938D0 /* CurbfindTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1F3FFC09A06EE10B914FBD /* Build configuration list for PBXNativeTarget "CurbfindTests" */;
+			buildPhases = (
+				D8D78E821D32F7D9F5F1BC32 /* Sources */,
+				733BEE8E2B9AF870EEE7A977 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FE35409FFE9E18092EB6954 /* PBXTargetDependency */,
+			);
+			name = CurbfindTests;
+			packageProductDependencies = (
+			);
+			productName = CurbfindTests;
+			productReference = 87DBD079BD491E87A00118C7 /* CurbfindTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		130F8C60B6A48E621CC0603B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					06620A87BD151222B0659F12 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+					88606DB8B0E606F00F76A9A2 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+					A550B8B94551FBB5006938D0 = {
+						DevelopmentTeam = QMM486NPYC;
+					};
+				};
+			};
+			buildConfigurationList = 9DF5A3230B593DD54200FD6C /* Build configuration list for PBXProject "Curbfind" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 95AED31CA490AFA6544F2499;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = EC8C5FFC8316680789C651E6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88606DB8B0E606F00F76A9A2 /* Curbfind */,
+				06620A87BD151222B0659F12 /* Curbfind-iOS */,
+				A550B8B94551FBB5006938D0 /* CurbfindTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		733BEE8E2B9AF870EEE7A977 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C83B6F0DA56C6B6D2A7B5D19 /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A465DEE2B1501424E31C2F98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				82312AEE6CBF886CA484CDD6 /* Assets.xcassets in Resources */,
+				7F3D8C5EDC74942075021565 /* areas.json in Resources */,
+				CA35B715B133BD443449376F /* cities.json in Resources */,
+				3A18840D78BA912ED90E4E89 /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E205F18573D45270E95D7CA6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA4DB10EF894DA4B56DDAEE5 /* Assets.xcassets in Resources */,
+				41CC0B2A17F5D267EB983431 /* Curbfind.entitlements in Resources */,
+				26980B5C1E7D80080D1DA354 /* areas.json in Resources */,
+				BB578C918583E5609AA5E202 /* cities.json in Resources */,
+				EC28AE079AD17B4D01335F5B /* search-fixture.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7C43A0F39C7A316D7CFF676D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40A2FE1251497F51A08274B4 /* Cities.swift in Sources */,
+				8CF6CD9599DCA0D023935A23 /* CraigslistAPI.swift in Sources */,
+				0E99D986295F92BDFCA8457E /* CurbfindApp.swift in Sources */,
+				4EA9DA2708620C8490E32735 /* Favorites.swift in Sources */,
+				D64D9A74A8238BEC298DF325 /* FiltersView.swift in Sources */,
+				C6E136C0A107744405681906 /* Listing.swift in Sources */,
+				2E42D398C7D072D095670B06 /* ListingDetailView.swift in Sources */,
+				DC741996075F9C513754A41F /* ListingRow.swift in Sources */,
+				F5A86A7005F75C77B6870536 /* ResultsList.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6179F339F1E8753461545B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F3F07E39805814F5CC2DFED /* Cities.swift in Sources */,
+				D6D36999E8313709EFAF281E /* CraigslistAPI.swift in Sources */,
+				E1A88CA74BDDCCEE3DD25918 /* CurbfindMacApp.swift in Sources */,
+				803545735C5656C1FA2C7C59 /* Favorites.swift in Sources */,
+				322F2D48CA7845ADC9E49173 /* FiltersView.swift in Sources */,
+				90ED985658ECEFCDE6FE4CCC /* Listing.swift in Sources */,
+				0DD29450F9993124FEEEAC7C /* ListingDetailView.swift in Sources */,
+				24E0ECFE4B624E032950C721 /* ListingRow.swift in Sources */,
+				0A7948831A2942D5B072FC87 /* ResultsList.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8D78E821D32F7D9F5F1BC32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CEBE8D34C9206C197091A2C /* CraigslistAPITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7FE35409FFE9E18092EB6954 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88606DB8B0E606F00F76A9A2 /* Curbfind */;
+			targetProxy = 90BC8FBFF6B36948E160F537 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		29E900F797C3B6F2934A516A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Curbfind-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Curbfind-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside.ios;
+				PRODUCT_NAME = Curbfind;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		322A34E798FE5ABBFC38F09D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		36EDB6E00D50FBD9723549BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.CurbfindTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Curbfind.app/Contents/MacOS/Curbfind";
+			};
+			name = Release;
+		};
+		4ECB46DBDE421953F5F74F2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Curbfind-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Curbfind-iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside.ios;
+				PRODUCT_NAME = Curbfind;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6E4545D79D0520416668D5BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/Curbfind.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside;
+				PRODUCT_NAME = Curbfind;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		96EBA8A6F3771CF672146D53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = QMM486NPYC;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		A5CF473B637ED21614A5E751 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.CurbfindTests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Curbfind.app/Contents/MacOS/Curbfind";
+			};
+			name = Debug;
+		};
+		AC3F6B56CA0A0E789A9244C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Resources/Curbfind.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nulljosh.curbside;
+				PRODUCT_NAME = Curbfind;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		81FA13D411C91F9351E2A80C /* Build configuration list for PBXNativeTarget "Curbfind-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29E900F797C3B6F2934A516A /* Debug */,
+				4ECB46DBDE421953F5F74F2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9DF5A3230B593DD54200FD6C /* Build configuration list for PBXProject "Curbfind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96EBA8A6F3771CF672146D53 /* Debug */,
+				322A34E798FE5ABBFC38F09D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CA18F6C5E8A2B628FEF91B80 /* Build configuration list for PBXNativeTarget "Curbfind" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E4545D79D0520416668D5BA /* Debug */,
+				AC3F6B56CA0A0E789A9244C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CE1F3FFC09A06EE10B914FBD /* Build configuration list for PBXNativeTarget "CurbfindTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5CF473B637ED21614A5E751 /* Debug */,
+				36EDB6E00D50FBD9723549BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 130F8C60B6A48E621CC0603B /* Project object */;
+}

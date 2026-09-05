@@ -1,4 +1,4 @@
-# Curbside roadmap
+# Curbfind roadmap
 
 Classifieds browser over Craigslist's undocumented JSON API.
 Plan: `~/.claude/plans/magical-noodling-candy.md`.
@@ -6,18 +6,18 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 ## Open
 - [ ] ~~App icon~~ (done 2026-09-05, location pin on dark — city search is the core action), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
-      2026-09-03: public search shows no exact "Curbside" match but many close
-      variants exist (Curbside Waste, Curbside Health, etc) — exact-match ASC
+      2026-09-03: public search shows no exact "Curbfind" match but many close
+      variants exist (Curbfind Waste, Curbfind Health, etc) — exact-match ASC
       probe still needed, not done. iOS target already builds clean, so this
       app is closer to submit-ready than Roost.
 - [ ] OfferUp reviews complain about off-platform scam redirects and bans with
-      no recourse. Curbside (browser, no payments) sidesteps that class of
+      no recourse. Curbfind (browser, no payments) sidesteps that class of
       complaint entirely — worth a line in store copy once listed.
 - [ ] Decide on watchOS/visionOS. Deliberately skipped for now: a 360-result
       photo grid has no watch story and no visionOS-specific affordance.
 
 ## Notes
-- Live at curbside.heyitsmejosh.com. Serve and share that, never the pages.dev URL.
+- Live at curbfind.heyitsmejosh.com. Serve and share that, never the pages.dev URL.
 - `sapi` ignores User-Agent completely, so native needs no disguise and no server.
 - `cc` is ignored upstream; any page size but 360 is rejected.
 - Posting bodies are stranger-authored HTML. Both decoders strip them to plain

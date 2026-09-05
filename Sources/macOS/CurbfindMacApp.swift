@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct CurbsideMacApp: App {
+struct CurbfindMacApp: App {
     @StateObject private var favorites = Favorites()
 
     var body: some Scene {
@@ -37,7 +37,7 @@ struct MacRootView: View {
     private var results: some View {
         ResultsList(model: model, selection: $selection,
                     savedOnly: showingSaved ? favorites.items : nil)
-            .navigationTitle(showingSaved ? "Saved" : "Curbside")
+            .navigationTitle(showingSaved ? "Saved" : "Curbfind")
             .navigationSplitViewColumnWidth(min: 300, ideal: 340)
             .toolbar {
                 Toggle(isOn: $showingSaved) { Label("Saved", systemImage: "star") }

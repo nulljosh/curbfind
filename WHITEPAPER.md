@@ -1,16 +1,16 @@
-# Curbside Technical Whitepaper
+# Curbfind Technical Whitepaper
 
 **v1.0.0** | September 2026
 
-Curbside is a fast, clean browser for Craigslist classifieds: pick a city,
+Curbfind is a fast, clean browser for Craigslist classifieds: pick a city,
 search, read the posting, save favourites. Web app plus native SwiftUI iOS and
 macOS apps. Live at
-[curbside.heyitsmejosh.com](https://curbside.heyitsmejosh.com).
+[curbfind.heyitsmejosh.com](https://curbfind.heyitsmejosh.com).
 
 ## The data source
 
 Craigslist publishes no API, but its own site fetches search results from an
-undocumented JSON endpoint, `sapi.craigslist.org/web/v8/postings`. Curbside
+undocumented JSON endpoint, `sapi.craigslist.org/web/v8/postings`. Curbfind
 reads that endpoint directly. Two upstream quirks shape the design:
 
 - The endpoint needs a numeric **area id**, and Craigslist publishes no area
