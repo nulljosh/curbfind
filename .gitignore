@@ -6,3 +6,4 @@ Curbside.xcodeproj/xcuserdata/
 *.xcarchive
 build/
 .build/
+.wrangler/
