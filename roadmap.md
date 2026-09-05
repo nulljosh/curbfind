@@ -4,7 +4,7 @@ Classifieds browser over Craigslist's undocumented JSON API.
 Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
-- [ ] ~~App icon~~ (done 2026-09-02, price tag on dark, both targets), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
+- [ ] ~~App icon~~ (done 2026-09-05, location pin on dark — city search is the core action), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
 - [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
       2026-09-03: public search shows no exact "Curbside" match but many close
       variants exist (Curbside Waste, Curbside Health, etc) — exact-match ASC
