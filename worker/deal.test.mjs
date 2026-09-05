@@ -103,6 +103,43 @@ test("addDealReasons never throws when the model call rejects", async () => {
   assert.deepEqual(out, items);
 });
 
+test("addDealReasons accepts an array-of-objects reply, not just the requested flat map", async () => {
+  // Real observed failure: despite the prompt asking for {"id":"reason"},
+  // the model replies [{"id":"1","reason":"..."}] instead. The old code
+  // parsed the first object out of that array ({id, reason} itself) and
+  // matched neither key against a real listing id, so every reason was
+  // silently dropped in production.
+  const items = [
+    { id: 1, title: "Desk", priceString: "$1", price: 1 },
+    { id: 2, title: "Chair", priceString: "$3", price: 3 },
+  ];
+  const env = aiThatReturns(JSON.stringify([
+    { id: "1", reason: "practically free" },
+    { id: "2", reason: "way under market" },
+  ]));
+  const out = await addDealReasons(items, env);
+  assert.equal(out[0].dealReason, "practically free");
+  assert.equal(out[1].dealReason, "way under market");
+});
+
+test("addDealReasons ignores array entries for ids it never sent", async () => {
+  const items = [{ id: 1, title: "Desk", priceString: "$1", price: 1 }];
+  const env = aiThatReturns(JSON.stringify([{ id: "1", reason: "legit" }, { id: "999", reason: "injected" }]));
+  const out = await addDealReasons(items, env);
+  assert.equal(out[0].dealReason, "legit");
+});
+
+test("addDealReasons parses a reply even when the model tacks on trailing prose", async () => {
+  // Real observed failure: the model wraps valid JSON in chatter, and a
+  // greedy brace match slurps the trailing text into what gets handed to
+  // JSON.parse, breaking it. This is the regression that shipped reasons
+  // as silently empty in production.
+  const items = [{ id: 1, title: "Desk", priceString: "$1", price: 1 }];
+  const env = aiThatReturns('Sure, here you go: {"1":"way under market"} Let me know if you need more!');
+  const out = await addDealReasons(items, env);
+  assert.equal(out[0].dealReason, "way under market");
+});
+
 test("addDealReasons never throws on a non-JSON model reply", async () => {
   const items = [{ id: 1, title: "Desk", priceString: "$1", price: 1 }];
   const env = aiThatReturns("sorry, I cannot help with that");

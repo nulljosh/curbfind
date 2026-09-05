@@ -73,13 +73,29 @@ export async function addDealReasons(items, env) {
         content: `These are classifieds listings, cheapest-relative-to-market first. In one short punchy phrase each (under 8 words), say why it looks like a good deal. Reply as JSON only, no other text: {"id": "reason"}.\n\n${list}`,
       }],
     });
-    const parsed = JSON.parse(String(res?.response ?? "").match(/\{[\s\S]*\}/)?.[0] || "{}");
-    if (!parsed || typeof parsed !== "object") return items;
+    // Asked for a flat {"id": "reason"} map, but models routinely ignore that
+    // and reply with an array of {id, reason} objects instead -- so accept
+    // both shapes rather than assuming compliance. The array is matched
+    // greedily (its own brackets bound it); the flat map is brace-only with
+    // no nesting, so a non-greedy match's first "}" is always its real end.
+    // Either way this drops any trailing prose the model tacks on.
+    const text = String(res?.response ?? "");
+    const arrayMatch = text.match(/\[[\s\S]*\]/);
+    const parsed = JSON.parse(arrayMatch?.[0] ?? text.match(/\{[\s\S]*?\}/)?.[0] ?? "{}");
+
     const reasons = {};
-    for (const [id, reason] of Object.entries(parsed)) {
-      if (ids.has(id) && typeof reason === "string" && reason.trim()) {
-        reasons[id] = reason.trim().slice(0, MAX_REASON_LEN);
+    const addReason = (id, reason) => {
+      const key = String(id);
+      if (ids.has(key) && typeof reason === "string" && reason.trim()) {
+        reasons[key] = reason.trim().slice(0, MAX_REASON_LEN);
       }
+    };
+    if (Array.isArray(parsed)) {
+      for (const entry of parsed) {
+        if (entry && typeof entry === "object") addReason(entry.id, entry.reason);
+      }
+    } else if (parsed && typeof parsed === "object") {
+      for (const [id, reason] of Object.entries(parsed)) addReason(id, reason);
     }
     return items.map((i) => (reasons[i.id] ? { ...i, dealReason: reasons[i.id] } : i));
   } catch (err) {
