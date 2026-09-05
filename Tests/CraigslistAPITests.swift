@@ -1,5 +1,5 @@
 import XCTest
-@testable import Curbside
+@testable import Curbfind
 
 /// Decodes the same worker/fixtures/search.json the JS decoder is pinned to, so
 /// the two ports cannot drift apart without one of them going red.
@@ -61,5 +61,47 @@ final class CraigslistAPITests: XCTestCase {
     func testStripTokenPrefixOnlyDropsANumericPrefix() {
         XCTAssertEqual(CraigslistAPI.stripTokenPrefix("3:00J0J_abc"), "00J0J_abc")
         XCTAssertEqual(CraigslistAPI.stripTokenPrefix("00J0J_abc"), "00J0J_abc")
+    }
+
+    // MARK: - Edge cases
+
+    func testDecodeSearchOnZeroResultsReturnsAnEmptyListNotAThrow() throws {
+        let body = Data(#"{"data":{"items":[],"totalResultCount":0,"decode":{"minPostingId":0,"minPostedDate":0,"locationDescriptions":[]}}}"#.utf8)
+        let results = try CraigslistAPI.decodeSearch(body)
+        XCTAssertEqual(results.listings, [])
+        XCTAssertEqual(results.total, 0)
+    }
+
+    func testDecodeSearchOnCompletelyMalformedJSONThrowsRatherThanCrashing() {
+        let body = Data("not json at all".utf8)
+        XCTAssertThrowsError(try CraigslistAPI.decodeSearch(body))
+    }
+
+    func testDecodeSearchOnValidJSONMissingTheDataKeyThrowsAReadableFailure() {
+        let body = Data(#"{"unexpected":true}"#.utf8)
+        XCTAssertThrowsError(try CraigslistAPI.decodeSearch(body)) { error in
+            guard case CraigslistAPI.Failure.upstream = error else {
+                return XCTFail("expected .upstream, got \(error)")
+            }
+        }
+    }
+
+    func testDecodeItemWithoutAUuidIsDroppedRatherThanCrashing() {
+        // Six leading positional fields, then only a title -- no tagged uuid array at all.
+        let item: [Any] = [1, 1.0, "sss", -1, "0:0~0~0", "abc", "No uuid here"]
+        let listing = CraigslistAPI.decodeItem(item, minID: 1000, minDate: 1_700_000_000, places: [])
+        XCTAssertNil(listing, "a listing with no uuid has no stable identity and no canonical URL")
+    }
+
+    func testDecodeItemWithAnOutOfRangeLocationIndexFallsBackToNilPlace() {
+        let item: [Any] = [1, 1.0, "sss", 5, "0:99~49.28~-123.12", "abc", [13, "uuid123"] as [Any], "Title"]
+        let listing = try? XCTUnwrap(CraigslistAPI.decodeItem(item, minID: 1000, minDate: 1_700_000_000, places: ["Only one entry"]))
+        XCTAssertNil(listing?.location)
+        XCTAssertEqual(listing?.lat, 49.28)
+        XCTAssertEqual(listing?.lon, -123.12)
+    }
+
+    func testSanitizeOnEmptyAndNilLikeInputNeverThrows() {
+        XCTAssertEqual(CraigslistAPI.sanitize(""), "")
     }
 }

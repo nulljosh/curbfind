@@ -1,8 +1,8 @@
 node_modules/
 .DS_Store
-.asc/artifacts/
+.asc/
 dist/
-Curbside.xcodeproj/xcuserdata/
+Curbfind.xcodeproj/xcuserdata/
 *.xcarchive
 build/
 .build/

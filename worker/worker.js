@@ -1,5 +1,5 @@
 import { decodeSearch, sanitizeBody } from "./decode.js";
-import SEED from "../data/areas.json";
+import SEED from "../data/areas.json" with { type: "json" };
 
 const SAPI = "https://sapi.craigslist.org/web/v8/postings";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";

@@ -45,7 +45,7 @@ targets:
         excludes: ["Curbfind.entitlements"]
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.curbside.ios
+        PRODUCT_BUNDLE_IDENTIFIER: com.nulljosh.curbside
         PRODUCT_NAME: Curbfind
         TARGETED_DEVICE_FAMILY: "1,2"
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

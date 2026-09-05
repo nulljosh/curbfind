@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curbfind — Privacy Policy</title>
+<meta name="description" content="Privacy policy for Curbfind. No accounts, no tracking, no data retention.">
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root{--curb:#cc5200}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--curb); color: #fff; }
+a { color: var(--curb); }
+.container { max-width: 720px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+h1 { font-size: 2rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 0.75rem; letter-spacing: -0.01em; }
+p { margin-bottom: 1rem; color: var(--color-soft); }
+ul { margin: 0 0 1rem 1.25rem; color: var(--color-soft); }
+li { margin-bottom: 0.5rem; }
+.updated { color: var(--color-soft); font-size: 0.9rem; margin-bottom: 3rem; }
+.back { display: inline-block; margin-top: 3rem; }
+strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Curbfind &middot; Last updated 5 September 2026</p>
+
+  <p><strong>Curbfind has no accounts, no sign-in, no analytics and no advertising.
+  Nothing about you is collected, stored or sold.</strong> The app is not able to identify
+  you, because it never asks who you are.</p>
+
+  <h2>What leaves your device</h2>
+  <p>Only your search terms and filters -- city, category, price range, keywords -- sent
+  directly to Craigslist's own public search API (or, on the web, relayed through our
+  Cloudflare Worker to work around browser CORS restrictions). No account, no device
+  fingerprint, no location beyond the city you typed, no history of past searches.</p>
+
+  <h2>What is kept</h2>
+  <p>Nothing on any server. Search results are fetched fresh each time and never stored.
+  Listings you star as saved, and your last-used city and filters, are stored on your
+  device only (localStorage on web, on-device storage on iOS/macOS), and are removed when
+  you delete the app or clear site data.</p>
+
+  <h2>Third parties</h2>
+  <p>Craigslist receives your search terms when a request reaches its API, and handles
+  that request under its own privacy policy. Opening a listing to reply takes you to
+  Craigslist's own site. Curbfind shares nothing with them beyond the search itself.</p>
+
+  <h2>Children</h2>
+  <p>The app collects no personal information from anyone, including children under 13.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the revised version will be posted on this page with a new
+  date above.</p>
+
+  <p class="back"><a href="/">&larr; Back to Curbfind</a></p>
+</div>
+</body>
+</html>
