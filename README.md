@@ -1,6 +1,6 @@
 # Curbfind
 
-![version](https://img.shields.io/badge/version-v1.0.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fcurbside-black?logo=github)](https://github.com/nulljosh/curbside)
+![version](https://img.shields.io/badge/version-v1.0.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) [![GitHub](https://img.shields.io/badge/GitHub-nulljosh%2Fcurbfind-black?logo=github)](https://github.com/nulljosh/curbfind)
 
 **Live:** https://curbfind.heyitsmejosh.com
 
@@ -21,6 +21,7 @@ Pick a city. Search. Read the post. Save the ones you like. That's the whole app
 - Favourites, kept on your device and nowhere else
 - Native iOS and macOS apps that talk to Craigslist directly. No server in between
 - A Cloudflare Worker for the web version, cached five minutes
+- Landing page background is the live app itself, one click zooms straight in
 
 ## Run
 
