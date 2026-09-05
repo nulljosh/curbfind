@@ -172,9 +172,13 @@ cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
 })();
 </script>
 <script>
-// The hero-demo iframe already has the real app loaded and silently running behind it.
-// "Opening" the app is just un-blurring that same iframe to fill the screen and handing
-// it interaction -- no navigation, no reload, no flash.
+// The hero-demo iframe already has the real app loaded and silently running behind it,
+// so the click plays the un-blur/zoom animation first for a seamless feel, then lands
+// on a real navigation to /app -- never a permanent fake-navigated state. Relying on
+// `transitionend` alone to flip the page "open" left the vignette stuck forever if that
+// event never fired (tab backgrounded, animation interrupted, reduced-motion changed
+// mid-flight): a fixed timeout matching the CSS transition duration guarantees the
+// zoom always finishes into a real page load.
 (function () {
   var hero = document.getElementById('hero');
   var cta = document.getElementById('ctaOpen');
@@ -184,19 +188,7 @@ cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
     if (e.metaKey || e.ctrlKey || e.shiftKey || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     e.preventDefault();
     hero.classList.add('zooming');
-    history.pushState(null, '', cta.href);
-    demo.addEventListener('transitionend', function done() {
-      demo.removeEventListener('transitionend', done);
-      demo.style.pointerEvents = 'auto';
-      demo.tabIndex = 0;
-      demo.focus();
-    }, { once: true });
-  });
-  window.addEventListener('popstate', function () {
-    if (location.pathname === '/' || location.pathname === '') {
-      hero.classList.remove('zooming');
-      demo.style.pointerEvents = 'none';
-    }
+    setTimeout(function () { location.href = cta.href; }, 900);
   });
 })();
 </script>
