@@ -29,3 +29,4 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## TUI pilot (2026-09-05)
 - `curbside-tui` SwiftPM target (SwiftTUI). `swift build && ./.build/debug/curbside-tui "bike" vancouver` reuses CraigslistAPI.swift as-is, same client the native apps use. Needs a real TTY.
+- [x] architecture.svg missing — sibling apps have one, this doesn't (project-sync 2026-09-05)

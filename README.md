@@ -19,9 +19,14 @@ Pick a city. Search. Read the post. Save the ones you like. That's the whole app
 - Any Craigslist city, found by name
 - Search results the way they should look: image, price, title, place
 - Favourites, kept on your device and nowhere else
-- Native iOS and macOS apps that talk to Craigslist directly. No server in between
+- Native iOS, macOS, Android, and desktop apps. iOS/macOS talk to Craigslist directly, no server in between
+- "Best deals" sort: ranked against the search's own median price, AI-tagged with a one-line reason
 - A Cloudflare Worker for the web version, cached five minutes
 - Landing page background is the live app itself, one click zooms straight in
+
+## Architecture
+
+<img src="architecture.svg" width="600" alt="">
 
 ## Run
 
