@@ -4,5 +4,6 @@
   "type": "module",
   "scripts": {
     "test": "node --test worker/*.test.mjs"
-  }
+  },
+  "description": "Craigslist browser for web, iOS, macOS, Android and desktop"
 }
