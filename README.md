@@ -14,6 +14,12 @@ Craigslist, without the 2003.
 
 Pick a city. Search. Read the post. Save the ones you like. That's the whole app, on the web and native on iPhone and Mac.
 
+## Screenshots
+
+<p>
+<img src="screenshots/curbfind-1.jpg" alt="Curbfind">
+</p>
+
 ## Features
 
 - Any Craigslist city, found by name
