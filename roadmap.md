@@ -5,7 +5,7 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
 - [ ] ~~App icon~~ (done 2026-09-05, location pin on dark — city search is the core action), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
-- [ ] Run `asc-name-creator` to confirm the App Store name before submitting.
+- [x] App Store name confirmed: ASC record 6809031662 is "Curbfind" (2026-09-06).
       2026-09-03: public search shows no exact "Curbfind" match but many close
       variants exist (Curbfind Waste, Curbfind Health, etc) — exact-match ASC
       probe still needed, not done. iOS target already builds clean, so this
