@@ -5,11 +5,6 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Open
 - [ ] ~~App icon~~ (done 2026-09-05, location pin on dark — city search is the core action), `architecture.svg`, `metadata/`, `.asc/workflow.json`.
-- [x] App Store name confirmed: ASC record 6809031662 is "Curbfind" (2026-09-06).
-      2026-09-03: public search shows no exact "Curbfind" match but many close
-      variants exist (Curbfind Waste, Curbfind Health, etc) — exact-match ASC
-      probe still needed, not done. iOS target already builds clean, so this
-      app is closer to submit-ready than Roost.
 - [ ] OfferUp reviews complain about off-platform scam redirects and bans with
       no recourse. Curbfind (browser, no payments) sidesteps that class of
       complaint entirely — worth a line in store copy once listed.
