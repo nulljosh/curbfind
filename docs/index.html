@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en"><head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Curbfind</title>
 <meta name="description" content="A faster way to browse local classifieds.">
@@ -53,6 +54,11 @@ ul li::marker{color:var(--curb)}
 hr{border:0;border-top:1px solid var(--border);margin:36px 0}
 small{color:var(--text2)}
 .device{margin:2rem auto}
+
+html.js .reveal{opacity:0;transform:translateY(20px)}
+html.js .reveal.in-view{opacity:1;transform:translateY(0);transition:opacity .6s ease-out,transform .6s ease-out}
+@media (prefers-reduced-motion: reduce){ html.js .reveal{opacity:1;transform:none} }
+@media (prefers-reduced-motion: no-preference){ .hero-float{will-change:transform} }
 </style>
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://curbfind.heyitsmejosh.com/screenshot.jpg">
@@ -101,7 +107,7 @@ small{color:var(--text2)}
 
 <main>
 <hr>
-<ul>
+<ul class="reveal">
   <li>Every listing in one grid, photos and prices up front.</li>
   <li>Search any of 700 cities worldwide.</li>
   <li>Save what you're watching. Nothing leaves your device.</li>
@@ -190,6 +196,25 @@ cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
     hero.classList.add('zooming');
     setTimeout(function () { location.href = cta.href; }, 900);
   });
+})();
+</script>
+<script>
+// Scroll-triggered reveal for the feature list
+(function () {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+// Subtle parallax on the drifting icon field behind the hero
+(function () {
+  var field = document.getElementById('heroFloat');
+  if (!field || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ticking = false;
+  function apply() { field.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)'; ticking = false; }
+  window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(apply); ticking = true; } }, { passive: true });
 })();
 </script>
 </body></html>
