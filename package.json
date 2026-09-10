@@ -5,5 +5,10 @@
   "scripts": {
     "test": "node --test worker/*.test.mjs"
   },
-  "description": "Craigslist browser for web, iOS, macOS, Android and desktop"
+  "description": "Craigslist browser for web, iOS, macOS, Android and desktop",
+  "keywords": [
+    "craigslist",
+    "marketplace",
+    "cross-platform"
+  ]
 }
