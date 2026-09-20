@@ -328,5 +328,24 @@ cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12)}
   });
 })();
 </script>
+<script src="/onboarding.js"></script>
+<script>
+    // First-run onboarding. Signed-out newcomers only, once per browser.
+    Onboarding.start({
+        key: "curbfind",
+        finishLabel: "Get started",
+        slides: [
+                { title: "Craigslist, made searchable",
+                  body: "Curbfind sweeps listings across cities and puts them in one clean, fast list.",
+                  art: "<svg width=\"120\" height=\"120\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3\"/></svg>" },
+                { title: "Spot the real deals",
+                  body: "Prices are ranked against what the same thing usually goes for, so bargains stand out.",
+                  art: "<svg width=\"120\" height=\"120\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12V4h8l9 9-8 8z\"/><circle cx=\"7.5\" cy=\"7.5\" r=\"1.3\"/></svg>" },
+                { title: "Save and revisit",
+                  body: "Star anything worth a second look and check back without re-running the search.",
+                  art: "<svg width=\"120\" height=\"120\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z\"/><circle cx=\"12\" cy=\"10\" r=\"2.5\"/></svg>" }
+        ]
+    });
+</script>
 </body>
 </html>
