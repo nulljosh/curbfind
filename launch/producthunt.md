@@ -1,4 +1,4 @@
-# Product Hunt draft — Curbfind
+# Product Hunt draft, Curbfind
 
 **Name:** Curbfind (9 chars)
 

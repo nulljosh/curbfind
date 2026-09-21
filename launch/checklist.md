@@ -1,4 +1,4 @@
-Launch checklist — Curbfind
+Launch checklist, Curbfind
 
 What's done: kit written, gallery copied, SEO/OG fixed and deployed, ASC listing checked.
 

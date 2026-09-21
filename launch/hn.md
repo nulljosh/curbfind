@@ -1,3 +1,5 @@
+Skip: no technical hook
+
 **Title (66 chars):** Show HN: Curbfind – Craigslist, without the 2003-era clutter
 
 **Body:**
