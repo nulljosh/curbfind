@@ -1,1 +1,1 @@
-/Users/joshua/Documents/Code/curbfind/CLAUDE.md
+CLAUDE.md
