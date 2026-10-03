@@ -30,8 +30,13 @@ struct ResultsList: View {
         if model.isLoading {
             ProgressView()
         } else if listings.isEmpty {
-            ContentUnavailableView(model.message ?? "Search to begin.",
-                                   systemImage: "magnifyingglass")
+            if savedOnly != nil {
+                ContentUnavailableView("Nothing saved yet", systemImage: "star",
+                                       description: Text("Tap the star on a listing to keep it here."))
+            } else {
+                ContentUnavailableView(model.message ?? "Search to begin.",
+                                       systemImage: "magnifyingglass")
+            }
         }
     }
 }
