@@ -27,7 +27,7 @@ struct RootView: View {
     }
 
     private var browse: some View {
-        ResultsList(model: model, selection: $selection, savedOnly: nil)
+        ResultsList(model: model, selection: $selection, savedOnly: nil, usesSelection: false)
             .navigationTitle("Curbfind")
             .navigationDestination(for: Listing.self) { ListingDetailView(listing: $0) }
             .searchable(text: $model.filters.query, prompt: "Search listings")
@@ -38,7 +38,7 @@ struct RootView: View {
     }
 
     private var saved: some View {
-        ResultsList(model: model, selection: $selection, savedOnly: favorites.items)
+        ResultsList(model: model, selection: $selection, savedOnly: favorites.items, usesSelection: false)
             .navigationTitle("Saved")
             .navigationDestination(for: Listing.self) { ListingDetailView(listing: $0) }
     }
