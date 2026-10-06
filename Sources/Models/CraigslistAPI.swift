@@ -245,21 +245,50 @@ struct CraigslistAPI {
     }
 }
 
-/// Craigslist publishes no area directory, so the id is read off the city's own
-/// search page and kept forever -- these never change.
+/// Craigslist's own area directory: every site's slug, id, name and coordinates.
+/// Fetched live; the last good copy is kept on the device so the app still opens
+/// offline. Nothing is bundled.
 actor AreaDirectory {
     static let shared = AreaDirectory()
 
-    private static let defaultsKey = "curbside.areaIds"
-    private var cache: [String: Int]
+    struct Area: Codable {
+        let slug: String
+        let id: Int
+        let name: String
+        let lat: Double
+        let lon: Double
+    }
 
-    init(seed: [String: Int] = AreaDirectory.bundledSeed()) {
-        let stored = UserDefaults.standard.dictionary(forKey: Self.defaultsKey) as? [String: Int] ?? [:]
-        cache = seed.merging(stored) { _, stored in stored }
+    private struct Raw: Decodable {
+        let Hostname: String, AreaID: Int, ShortDescription: String?, Description: String
+        let Latitude: Double, Longitude: Double
+    }
+
+    private static let defaultsKey = "curbfind.areas.v1"
+    private var areas: [Area]
+
+    init() {
+        let stored = UserDefaults.standard.data(forKey: Self.defaultsKey)
+        areas = stored.flatMap { try? JSONDecoder().decode([Area].self, from: $0) } ?? []
+    }
+
+    /// Live list, falling back to the last good copy.
+    func all(session: URLSession = .shared) async -> [Area] {
+        if let url = URL(string: "https://reference.craigslist.org/Areas"),
+           let (data, response) = try? await session.data(from: url),
+           (response as? HTTPURLResponse)?.statusCode == 200,
+           let raw = try? JSONDecoder().decode([Raw].self, from: data), !raw.isEmpty {
+            areas = raw.map { Area(slug: $0.Hostname, id: $0.AreaID, name: $0.ShortDescription ?? $0.Description,
+                                   lat: $0.Latitude, lon: $0.Longitude) }
+            if let enc = try? JSONEncoder().encode(areas) { UserDefaults.standard.set(enc, forKey: Self.defaultsKey) }
+        }
+        return areas
     }
 
     func id(for city: String, session: URLSession) async throws -> Int? {
-        if let hit = cache[city] { return hit }
+        if let hit = areas.first(where: { $0.slug == city }) { return hit.id }
+        if let hit = await all(session: session).first(where: { $0.slug == city }) { return hit.id }
+        // Directory unreachable or the slug is a sub-site: read the id off the city's own page.
         let url = URL(string: "https://www.craigslist.org/search/area/\(city)")!
         let (data, response) = try await session.data(from: url)
         // Craigslist 404s cleanly on an unknown slug.
@@ -267,16 +296,6 @@ actor AreaDirectory {
               let html = String(data: data, encoding: .utf8),
               let match = html.range(of: "\"areaId\":\\d+", options: .regularExpression),
               let id = Int(html[match].split(separator: ":")[1]) else { return nil }
-
-        cache[city] = id
-        UserDefaults.standard.set(cache, forKey: Self.defaultsKey)
         return id
-    }
-
-    private static func bundledSeed() -> [String: Int] {
-        guard let url = Bundle.main.url(forResource: "areas", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let seed = try? JSONDecoder().decode([String: Int].self, from: data) else { return [:] }
-        return seed
     }
 }

@@ -1,22 +1,17 @@
 import Foundation
 
-/// Every Craigslist site worldwide, generated at build time by
-/// scripts/fetch-cities.mjs so nothing scrapes at runtime.
-struct City: Identifiable, Hashable, Decodable {
+/// Every Craigslist site worldwide, read live from Craigslist's area directory.
+struct City: Identifiable, Hashable {
     let slug: String
     let name: String
     var id: String { slug }
 
-    static let all: [City] = {
-        guard let url = Bundle.main.url(forResource: "cities", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let cities = try? JSONDecoder().decode([City].self, from: data) else {
-            return [City(slug: "vancouver", name: "vancouver")]
-        }
-        return cities
-    }()
+    static func load() async -> [City] {
+        let areas = await AreaDirectory.shared.all()
+        return areas.isEmpty ? [City(slug: "vancouver", name: "vancouver")] : areas.map { City(slug: $0.slug, name: $0.name) }
+    }
 
-    static func matching(_ text: String) -> [City] {
+    static func matching(_ text: String, in all: [City]) -> [City] {
         let q = text.lowercased()
         guard !q.isEmpty else { return Array(all.prefix(40)) }
         return all.filter { $0.name.contains(q) || $0.slug.contains(q) }

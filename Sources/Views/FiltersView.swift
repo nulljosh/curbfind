@@ -5,6 +5,13 @@ struct FiltersView: View {
     var onSearch: () -> Void
 
     @State private var cityQuery = ""
+    @State private var cities: [City] = []
+
+    /// The matches, always including the selected city so the picker never shows an empty selection.
+    private var options: [City] {
+        let m = City.matching(cityQuery, in: cities)
+        return m.contains { $0.slug == filters.city } ? m : [City(slug: filters.city, name: filters.city)] + m
+    }
 
     var body: some View {
         Form {
@@ -15,7 +22,7 @@ struct FiltersView: View {
             Section("Where") {
                 TextField("Find a city", text: $cityQuery)
                 Picker("City", selection: $filters.city) {
-                    ForEach(City.matching(cityQuery)) { city in
+                    ForEach(options) { city in
                         Text(city.name).tag(city.slug)
                     }
                 }
@@ -37,5 +44,6 @@ struct FiltersView: View {
                 .keyboardShortcut(.defaultAction)
         }
         .onSubmit(onSearch)
+        .task { cities = await City.load() }
     }
 }
