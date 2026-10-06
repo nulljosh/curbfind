@@ -83,15 +83,25 @@ export async function rerankByValue(items, env, query = "") {
     const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
       messages: [{
         role: "user",
-        content: `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, parts only, or an accessory rather than the real item. 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`,
+        content: `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, or anything that is not the item itself (parts, components, tires, pedals, clothing, accessories, cases, broken or for-parts). 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`,
       }],
     });
-    const arr = JSON.parse(String(res?.response ?? "").match(/\[[\s\S]*\]/)?.[0] ?? "[]");
-    const value = {};
-    for (const e of Array.isArray(arr) ? arr : []) {
-      const v = Number(e?.value);
-      if (e && ids.has(String(e.id)) && Number.isFinite(v)) value[String(e.id)] = Math.min(10, Math.max(0, v));
+    // Models drift on shape (array, bare objects, flat {id: n} map), so read every
+    // flat {...} object on its own instead of trusting the outer JSON.
+    const text = String(res?.response ?? "");
+    const entries = [];
+    for (const m of text.match(/\{[^{}]*\}/g) ?? []) {
+      let o;
+      try { o = JSON.parse(m); } catch { continue; }
+      if (o && "id" in o) entries.push([o.id, o.value ?? o.score ?? o.rating]);
+      else entries.push(...Object.entries(o ?? {}));
     }
+    const value = {};
+    for (const [id, raw] of entries) {
+      const v = Number(raw);
+      if (ids.has(String(id)) && Number.isFinite(v)) value[String(id)] = Math.min(10, Math.max(0, v));
+    }
+    if (!Object.keys(value).length) console.warn("rerankByValue: no usable scores in", text.slice(0, 200));
     if (!Object.keys(value).length) return items;
     // Unscored pool items get a neutral 5 so one missed id doesn't sink a listing.
     const scored = pool.map((i) => ({ ...i, valueScore: value[String(i.id)] ?? 5 }));

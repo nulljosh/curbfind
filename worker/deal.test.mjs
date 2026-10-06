@@ -313,3 +313,15 @@ test("rerankByValue returns the price ranking when the model fails or lies", asy
   const junk = { run: async () => ({ response: '[{"id":"nope","value":10},{"id":1,"value":"lots"}]' }) };
   assert.deepEqual(await rerankByValue(items, { AI: junk }), items);
 });
+
+test("rerankByValue reads bare objects the model forgot to wrap in an array", async () => {
+  const items = rankByDeal([
+    { id: "a", price: 30, priceString: "$30", title: "scam" },
+    { id: "b", price: 60, priceString: "$60", title: "good" },
+    { id: "c", price: 200, priceString: "$200", title: "c" },
+    { id: "d", price: 220, priceString: "$220", title: "d" },
+    { id: "e", price: 240, priceString: "$240", title: "e" },
+  ]);
+  const ai = { run: async () => ({ response: '{"id": "a", "value": 0},\n{"id": "b", "value": 9}' }) };
+  assert.equal((await rerankByValue(items, { AI: ai }))[0].id, "b");
+});
