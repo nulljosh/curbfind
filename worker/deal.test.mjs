@@ -17,7 +17,7 @@ test("rankByDeal with no priced items at all returns items unchanged", () => {
 test("rankByDeal puts the item furthest below the median first", () => {
   const items = [
     { id: "a", price: 100 },
-    { id: "b", price: 10 },   // far below median -> best deal
+    { id: "b", price: 30 },   // far below median -> best deal
     { id: "c", price: 90 },
   ];
   const ranked = rankByDeal(items);
@@ -27,7 +27,7 @@ test("rankByDeal puts the item furthest below the median first", () => {
 });
 
 test("rankByDeal sorts priceless items last, never crashing on null price", () => {
-  const items = [{ id: "free", price: null }, { id: "cheap", price: 5 }, { id: "pricey", price: 500 }];
+  const items = [{ id: "free", price: null }, { id: "cheap", price: 100 }, { id: "pricey", price: 500 }];
   const ranked = rankByDeal(items);
   assert.equal(ranked.at(-1).id, "free");
   assert.equal(ranked[0].id, "cheap");
@@ -231,7 +231,7 @@ function craigslistFixture(items) {
 test("search with sort=deal ranks and annotates results without forwarding sort upstream", async () => {
   const raw = [
     [1000, 0, 1, 100, "0:0~49~-123", "x", [10, "$100"], [13, "uuid-1"], "Pricey thing"],
-    [1001, 0, 1, 5, "0:0~49~-123", "x", [10, "$5"], [13, "uuid-2"], "Cheap thing"],
+    [1001, 0, 1, 40, "0:0~49~-123", "x", [10, "$40"], [13, "uuid-2"], "Cheap thing"],
   ];
   const real = globalThis.fetch;
   let sapiUrl = "";
@@ -283,4 +283,10 @@ test("a normal (non-deal) sort forwards straight through and is never AI-annotat
   } finally {
     globalThis.fetch = real;
   }
+});
+
+test("placeholder prices under 15% of median never outrank real deals", async () => {
+  const { rankByDeal } = await import("./worker.js");
+  const r = rankByDeal([{ price: 1 }, { price: 100 }, { price: 200 }, { price: 300 }, { price: 80 }]);
+  assert.equal(r[0].price, 80);
 });

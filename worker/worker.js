@@ -46,7 +46,8 @@ export function rankByDeal(items) {
   const median = priced[Math.floor(priced.length / 2)];
   const scored = items.map((i) => ({
     ...i,
-    dealScore: i.price == null ? -Infinity : (median - i.price) / median,
+    // ponytail: under 15% of median is a $1 placeholder or bait, not a deal; 15% is a guess, tune from real results.
+    dealScore: i.price == null || i.price < median * 0.15 ? -Infinity : (median - i.price) / median,
   }));
   scored.sort((a, b) => b.dealScore - a.dealScore);
   return scored;
