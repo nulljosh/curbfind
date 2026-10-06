@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { rankByDeal, addDealReasons } from "./worker.js";
+import { rankByDeal, addDealReasons, rerankByValue } from "./worker.js";
 import worker from "./worker.js";
 
 // --- rankByDeal --------------------------------------------------------
@@ -289,4 +289,27 @@ test("placeholder prices under 15% of median never outrank real deals", async ()
   const { rankByDeal } = await import("./worker.js");
   const r = rankByDeal([{ price: 1 }, { price: 100 }, { price: 200 }, { price: 300 }, { price: 80 }]);
   assert.equal(r[0].price, 80);
+});
+
+test("rerankByValue demotes a cheap scam below a solid deal", async () => {
+  const items = rankByDeal([
+    { id: "scam", price: 30, priceString: "$30", title: "iPhone 15 DEPOSIT FIRST" },
+    { id: "good", price: 60, priceString: "$60", title: "Trek 820 hybrid bike" },
+    { id: "a", price: 200, priceString: "$200", title: "bike a" },
+    { id: "b", price: 220, priceString: "$220", title: "bike b" },
+    { id: "c", price: 240, priceString: "$240", title: "bike c" },
+  ]);
+  assert.equal(items[0].id, "scam");
+  const ai = { run: async () => ({ response: '[{"id":"scam","value":0},{"id":"good","value":9}]' }) };
+  const out = await rerankByValue(items, { AI: ai }, "bike");
+  assert.equal(out[0].id, "good");
+  assert.equal(out.length, items.length);
+});
+
+test("rerankByValue returns the price ranking when the model fails or lies", async () => {
+  const items = rankByDeal([{ id: 1, price: 10, priceString: "$10", title: "x" }, { id: 2, price: 50, priceString: "$50", title: "y" }, { id: 3, price: 90, priceString: "$90", title: "z" }]);
+  const boom = { run: async () => { throw new Error("down"); } };
+  assert.deepEqual(await rerankByValue(items, { AI: boom }), items);
+  const junk = { run: async () => ({ response: '[{"id":"nope","value":10},{"id":1,"value":"lots"}]' }) };
+  assert.deepEqual(await rerankByValue(items, { AI: junk }), items);
 });

@@ -65,6 +65,45 @@ export function rankByDeal(items) {
   return scored;
 }
 
+const VALUE_POOL = 20;
+
+// Price-vs-median can't tell a bike from a bike rack. Ask the model to score
+// the cheapest candidates for real bang for the buck (is it the thing searched,
+// is it sound, any scam or parts-only red flags), then weight the price score
+// by it. Same trust model as addDealReasons: titles are hostile input, the reply
+// is only ever a clamped number keyed by an id we sent. Best-effort: any failure
+// returns the price ranking untouched.
+export async function rerankByValue(items, env, query = "") {
+  const pool = items.filter((i) => i.dealScore > -Infinity).slice(0, VALUE_POOL);
+  if (pool.length < 2 || !env.AI) return items;
+  const ids = new Set(pool.map((i) => String(i.id)));
+  const list = pool.map((i) => `${i.id}: "${i.title.slice(0, 200).replace(/"/g, "'")}" - ${i.priceString}`).join("\n");
+  const want = query ? `The buyer searched for "${String(query).slice(0, 80).replace(/"/g, "'")}". ` : "";
+  try {
+    const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
+      messages: [{
+        role: "user",
+        content: `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, parts only, or an accessory rather than the real item. 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`,
+      }],
+    });
+    const arr = JSON.parse(String(res?.response ?? "").match(/\[[\s\S]*\]/)?.[0] ?? "[]");
+    const value = {};
+    for (const e of Array.isArray(arr) ? arr : []) {
+      const v = Number(e?.value);
+      if (e && ids.has(String(e.id)) && Number.isFinite(v)) value[String(e.id)] = Math.min(10, Math.max(0, v));
+    }
+    if (!Object.keys(value).length) return items;
+    // Unscored pool items get a neutral 5 so one missed id doesn't sink a listing.
+    const scored = pool.map((i) => ({ ...i, valueScore: value[String(i.id)] ?? 5 }));
+    scored.sort((a, b) => b.dealScore * (b.valueScore / 10) - a.dealScore * (a.valueScore / 10));
+    const poolIds = new Set(scored.map((i) => i.id));
+    return [...scored, ...items.filter((i) => !poolIds.has(i.id))];
+  } catch (err) {
+    console.error("rerankByValue:", err);
+    return items;
+  }
+}
+
 const MAX_REASON_LEN = 80;
 
 // One batched call covers the whole page instead of one call per listing.
@@ -144,7 +183,9 @@ async function search(url, env) {
   const payload = await res.json();
   if (payload.errors?.length) return json({ error: payload.errors[0].message }, 502);
   const decoded = decodeSearch(payload);
-  const items = dealSort ? await addDealReasons(rankByDeal(decoded.items), env) : decoded.items;
+  const items = dealSort
+    ? await addDealReasons(await rerankByValue(rankByDeal(decoded.items), env, p.get("q")), env)
+    : decoded.items;
   return json({ ...decoded, items, city, offset });
 }
 

@@ -33,8 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 
-// Curbside's own rust-orange, matching web/index.html's --curb token.
-private val Curb = Color(0xCC, 0x52, 0x00)
+// Curbside's own blue, matching web/index.html's --curb token.
+private val Curb = Color(0x00, 0x44, 0xCC)
 
 @Composable
 fun SearchScreen(modifier: Modifier = Modifier) {
