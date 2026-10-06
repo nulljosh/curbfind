@@ -30,6 +30,7 @@ targets:
         # Missing LSApplicationCategoryType is the real cause of ITMS-90242.
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
+        INFOPLIST_KEY_NSLocationUsageDescription: "Curbfind uses your location once to find the nearest city. It never leaves your device."
         GENERATE_INFOPLIST_FILE: YES
         CODE_SIGN_ENTITLEMENTS: Resources/Curbfind.entitlements
   Curbfind-iOS:

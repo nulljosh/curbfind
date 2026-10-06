@@ -65,7 +65,12 @@ export function rankByDeal(items) {
   return scored;
 }
 
-const VALUE_POOL = 20;
+const VALUE_POOL = 10;
+const AI_TIMEOUT_MS = 12000;
+
+// AI is a garnish: never let a slow model hold the search hostage.
+const withTimeout = (p, ms = AI_TIMEOUT_MS) =>
+  Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error("ai timeout")), ms))]);
 
 // Price-vs-median can't tell a bike from a bike rack. Ask the model to score
 // the cheapest candidates for real bang for the buck (is it the thing searched,
@@ -80,20 +85,25 @@ export async function rerankByValue(items, env, query = "") {
   const list = pool.map((i) => `${i.id}: "${i.title.slice(0, 200).replace(/"/g, "'")}" - ${i.priceString}`).join("\n");
   const want = query ? `The buyer searched for "${String(query).slice(0, 80).replace(/"/g, "'")}". ` : "";
   try {
-    const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
+    const res = await withTimeout(env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
       messages: [{
         role: "user",
         content: `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, or anything that is not the item itself (parts, components, tires, pedals, clothing, accessories, cases, broken or for-parts). 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`,
       }],
-    });
+    }));
     // Models drift on shape (array, bare objects, flat {id: n} map), so read every
     // flat {...} object on its own instead of trusting the outer JSON.
     const text = String(res?.response ?? "");
     const entries = [];
+    const reasonOf = {};
     for (const m of text.match(/\{[^{}]*\}/g) ?? []) {
       let o;
       try { o = JSON.parse(m); } catch { continue; }
-      if (o && "id" in o) entries.push([o.id, o.value ?? o.score ?? o.rating]);
+      if (o && "id" in o) {
+        entries.push([o.id, o.value ?? o.score ?? o.rating]);
+        const why = o.why ?? o.reason;
+        if (ids.has(String(o.id)) && typeof why === "string" && why.trim()) reasonOf[String(o.id)] = why.trim().slice(0, MAX_REASON_LEN);
+      }
       else entries.push(...Object.entries(o ?? {}));
     }
     const value = {};
@@ -104,7 +114,7 @@ export async function rerankByValue(items, env, query = "") {
     if (!Object.keys(value).length) console.warn("rerankByValue: no usable scores in", text.slice(0, 200));
     if (!Object.keys(value).length) return items;
     // Unscored pool items get a neutral 5 so one missed id doesn't sink a listing.
-    const scored = pool.map((i) => ({ ...i, valueScore: value[String(i.id)] ?? 5 }));
+    const scored = pool.map((i) => ({ ...i, valueScore: value[String(i.id)] ?? 5, ...(reasonOf[String(i.id)] ? { dealReason: reasonOf[String(i.id)] } : {}) }));
     scored.sort((a, b) => b.dealScore * (b.valueScore / 10) - a.dealScore * (a.valueScore / 10));
     const poolIds = new Set(scored.map((i) => i.id));
     return [...scored, ...items.filter((i) => !poolIds.has(i.id))];
@@ -130,12 +140,12 @@ export async function addDealReasons(items, env) {
   // title can do is waste the model's own output on a useless reason.
   const list = top.map((i) => `${i.id}: "${i.title.slice(0, 200).replace(/"/g, "'")}" - ${i.priceString}`).join("\n");
   try {
-    const res = await env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
+    const res = await withTimeout(env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
       messages: [{
         role: "user",
         content: `These are classifieds listings, cheapest-relative-to-market first. In one short punchy phrase each (under 8 words), say why it looks like a good deal. Reply as JSON only, no other text: {"id": "reason"}.\n\n${list}`,
       }],
-    });
+    }));
     // Asked for a flat {"id": "reason"} map, but models routinely ignore that
     // and reply with an array of {id, reason} objects instead -- so accept
     // both shapes rather than assuming compliance. The array is matched
@@ -193,9 +203,15 @@ async function search(url, env) {
   const payload = await res.json();
   if (payload.errors?.length) return json({ error: payload.errors[0].message }, 502);
   const decoded = decodeSearch(payload);
-  const items = dealSort
-    ? await addDealReasons(await rerankByValue(rankByDeal(decoded.items), env, p.get("q")), env)
-    : decoded.items;
+  let items = decoded.items;
+  if (dealSort) {
+    // Value scoring and the one-line reasons are independent model calls, so run
+    // them side by side: wall time is the slower one, not the sum.
+    const ranked = rankByDeal(items);
+    const [reasoned, valued] = await Promise.all([addDealReasons(ranked, env), rerankByValue(ranked, env, p.get("q"))]);
+    const reasonOf = new Map(reasoned.filter((i) => i.dealReason).map((i) => [i.id, i.dealReason]));
+    items = valued.map((i) => (reasonOf.has(i.id) ? { ...i, dealReason: reasonOf.get(i.id) } : i));
+  }
   return json({ ...decoded, items, city, offset });
 }
 

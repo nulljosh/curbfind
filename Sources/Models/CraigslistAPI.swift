@@ -285,6 +285,16 @@ actor AreaDirectory {
         return areas
     }
 
+    /// Slug of the Craigslist area closest to a point. Longitude is scaled by cos(lat)
+    /// so the pick isn't skewed at high latitudes.
+    func nearest(lat: Double, lon: Double) async -> String? {
+        let k = cos(lat * .pi / 180)
+        let list = await all()
+        return list.min { a, b in
+            pow(a.lat - lat, 2) + pow((a.lon - lon) * k, 2) < pow(b.lat - lat, 2) + pow((b.lon - lon) * k, 2)
+        }?.slug
+    }
+
     func id(for city: String, session: URLSession) async throws -> Int? {
         if let hit = areas.first(where: { $0.slug == city }) { return hit.id }
         if let hit = await all(session: session).first(where: { $0.slug == city }) { return hit.id }
