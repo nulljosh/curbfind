@@ -1,5 +1,6 @@
 import { decodeSearch, sanitizeBody } from "./decode.js";
 import SEED from "../data/areas.json" with { type: "json" };
+import COORDS from "../data/area-coords.json" with { type: "json" };
 
 const SAPI = "https://sapi.craigslist.org/web/v8/postings";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
@@ -134,6 +135,25 @@ async function search(url, env) {
   return json({ ...decoded, items, city, offset });
 }
 
+// Nearest Craigslist area to a point. Squared degrees are fine for picking among
+// ~700 cities; longitude is scaled by cos(lat) so it isn't skewed at high latitudes.
+export function nearestArea(lat, lon) {
+  const k = Math.cos((lat * Math.PI) / 180);
+  let best = null, bestD = Infinity;
+  for (const [slug, la, lo] of COORDS) {
+    const d = (la - lat) ** 2 + ((lo - lon) * k) ** 2;
+    if (d < bestD) { best = slug; bestD = d; }
+  }
+  return best;
+}
+
+function nearest(url) {
+  const lat = Number(url.searchParams.get("lat")), lon = Number(url.searchParams.get("lon"));
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180)
+    return json({ error: "bad lat/lon" }, 400);
+  return json({ city: nearestArea(lat, lon) });
+}
+
 async function post(uuid) {
   const res = await fetch(`${SAPI}/${encodeURIComponent(uuid)}?cc=US&lang=en`, {
     headers: { "User-Agent": UA },
@@ -157,6 +177,7 @@ export default {
     if (!success) return json({ error: "slow down" }, 429);
 
     if (url.pathname === "/api/search") return search(url, env);
+    if (url.pathname === "/api/nearest") return nearest(url);
     const uuid = url.pathname.match(/^\/api\/post\/([\w-]+)$/)?.[1];
     if (uuid) return post(uuid);
     return json({ error: "not found" }, 404);

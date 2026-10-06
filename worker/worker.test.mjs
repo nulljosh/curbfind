@@ -75,3 +75,9 @@ test("post lookup for a missing uuid returns 404 with craigslist's own error whe
     assert.equal(body.error, "not found");
   });
 });
+
+import { nearestArea } from "./worker.js";
+test("nearestArea picks the closest Craigslist city", () => {
+  assert.equal(nearestArea(49.28, -123.12), "vancouver");
+  assert.equal(nearestArea(40.71, -74.0), "newyork");
+});

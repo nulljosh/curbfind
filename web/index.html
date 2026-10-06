@@ -83,6 +83,7 @@ footer a{color:inherit}
     <select id="cat" name="cat" aria-label="Category"></select>
     <button class="go" type="submit">Search</button>
     <button type="button" id="toggle" aria-expanded="false">Filters</button>
+    <button type="button" id="nearme">Near me</button>
     <button type="button" id="favbtn" aria-pressed="false">Saved</button>
     <div class="more-filters" id="filters" hidden>
       <input class="narrow" id="min_price" type="number" min="0" placeholder="Min $" aria-label="Minimum price">
@@ -307,6 +308,21 @@ $("f").addEventListener("submit", async (e) => {
   } catch {
     status.textContent = "Couldn't reach the server.";
   }
+});
+
+// Near me: nearest Craigslist city to the device, ranked by deal.
+$("nearme").addEventListener("click", () => {
+  if (!navigator.geolocation) { status.textContent = "Location isn't available here."; return; }
+  status.textContent = "Finding you…";
+  navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+    try {
+      const d = await (await fetch(`${API}/api/nearest?lat=${coords.latitude}&lon=${coords.longitude}`)).json();
+      if (d.error) { status.textContent = d.error; return; }
+      $("city").value = d.city;
+      $("sort").value = "deal";
+      $("f").requestSubmit();
+    } catch { status.textContent = "Couldn't reach the server."; }
+  }, () => { status.textContent = "Location was blocked. Type a city instead."; }, { timeout: 10000 });
 });
 
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
