@@ -1,6 +1,6 @@
 // ponytail: cache the shell only. Listings go stale in minutes, so caching them
 // would be worse than not having them.
-const SHELL = ["./", "./index.html", "./tokens.css", "./cities.json"];
+const SHELL = ["./", "./index.html", "./tokens.css"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open("curbside-v1").then((c) => c.addAll(SHELL)).then(() => self.skipWaiting()));
 });

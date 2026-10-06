@@ -153,7 +153,7 @@ const favs = {
 
 CATEGORIES.forEach(([v, label]) => $("cat").add(new Option(label, v)));
 
-fetch("cities.json").then((r) => r.json()).then((cities) => {
+fetch(`${API}/api/cities`).then((r) => r.json()).then((cities) => {
   const dl = $("cities");
   for (const c of cities) dl.append(new Option(c.name, c.slug));
 }).catch(() => {}); // the city box still accepts a typed slug without the list

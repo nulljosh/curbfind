@@ -1,6 +1,4 @@
 import { decodeSearch, sanitizeBody } from "./decode.js";
-import SEED from "../data/areas.json" with { type: "json" };
-import COORDS from "../data/area-coords.json" with { type: "json" };
 
 const SAPI = "https://sapi.craigslist.org/web/v8/postings";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
@@ -10,11 +8,25 @@ const PAGE = 360;
 
 // Craigslist publishes no area directory, so read the id off the city's own
 // search page once and keep it forever -- these never change.
+// Craigslist's own area directory: hostname, id, name, coordinates. Cached at the edge for a day.
+export async function areaList() {
+  try {
+    const res = await fetch("https://reference.craigslist.org/Areas", { cf: { cacheTtl: 86400, cacheEverything: true } });
+    return res.ok ? await res.json() : [];
+  } catch {
+    return []; // ponytail: directory down -> callers fall back to the per-city page scrape
+  }
+}
+
 async function areaId(city, env) {
-  if (SEED[city]) return SEED[city];
   const key = `area:${city}`;
   const hit = await env.AREAS.get(key);
   if (hit) return Number(hit);
+  const known = (await areaList()).find((a) => a.Hostname === city);
+  if (known) {
+    await env.AREAS.put(key, String(known.AreaID));
+    return known.AreaID;
+  }
   const res = await fetch(`https://www.craigslist.org/search/area/${encodeURIComponent(city)}`, {
     headers: { "User-Agent": UA },
   });
@@ -138,21 +150,27 @@ async function search(url, env) {
 
 // Nearest Craigslist area to a point. Squared degrees are fine for picking among
 // ~700 cities; longitude is scaled by cos(lat) so it isn't skewed at high latitudes.
-export function nearestArea(lat, lon) {
+export function nearestArea(areas, lat, lon) {
   const k = Math.cos((lat * Math.PI) / 180);
   let best = null, bestD = Infinity;
-  for (const [slug, la, lo] of COORDS) {
-    const d = (la - lat) ** 2 + ((lo - lon) * k) ** 2;
-    if (d < bestD) { best = slug; bestD = d; }
+  for (const a of areas) {
+    const d = (a.Latitude - lat) ** 2 + ((a.Longitude - lon) * k) ** 2;
+    if (d < bestD) { best = a.Hostname; bestD = d; }
   }
   return best;
 }
 
-function nearest(url) {
+async function nearest(url) {
   const lat = Number(url.searchParams.get("lat")), lon = Number(url.searchParams.get("lon"));
   if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180)
     return json({ error: "bad lat/lon" }, 400);
-  return json({ city: nearestArea(lat, lon) });
+  const city = nearestArea(await areaList(), lat, lon);
+  return city ? json({ city }) : json({ error: "city directory unavailable" }, 502);
+}
+
+async function cities() {
+  const list = await areaList();
+  return json(list.map((a) => ({ slug: a.Hostname, name: a.ShortDescription || a.Description })));
 }
 
 async function post(uuid) {
@@ -179,6 +197,7 @@ export default {
 
     if (url.pathname === "/api/search") return search(url, env);
     if (url.pathname === "/api/nearest") return nearest(url);
+    if (url.pathname === "/api/cities") return cities();
     const uuid = url.pathname.match(/^\/api\/post\/([\w-]+)$/)?.[1];
     if (uuid) return post(uuid);
     return json({ error: "not found" }, 404);

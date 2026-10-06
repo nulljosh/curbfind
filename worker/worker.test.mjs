@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import worker from "./worker.js";
+import worker, { nearestArea } from "./worker.js";
 
 // worker.js hits the network (Craigslist's sapi, and its own area-lookup page)
 // and reads two bindings (env.AREAS, env.RATE_LIMITER). These tests stub both
@@ -76,8 +76,11 @@ test("post lookup for a missing uuid returns 404 with craigslist's own error whe
   });
 });
 
-import { nearestArea } from "./worker.js";
 test("nearestArea picks the closest Craigslist city", () => {
-  assert.equal(nearestArea(49.28, -123.12), "vancouver");
-  assert.equal(nearestArea(40.71, -74.0), "newyork");
+  const areas = [
+    { Hostname: "vancouver", Latitude: 49.25, Longitude: -123.1 },
+    { Hostname: "newyork", Latitude: 40.7, Longitude: -74.0 },
+  ];
+  assert.equal(nearestArea(areas, 49.28, -123.12), "vancouver");
+  assert.equal(nearestArea(areas, 40.71, -74.0), "newyork");
 });

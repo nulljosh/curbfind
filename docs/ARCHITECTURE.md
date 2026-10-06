@@ -20,8 +20,8 @@ Craigslist's sapi returns search results as positional arrays indexed against a 
 |---|---|
 | `Sources/Models/CraigslistAPI.swift` | Talks to Craigslist sapi directly (no server, no auth). Builds search and detail requests, decodes positional-array responses into `Listing` objects via `decodeSearch` and `decodeItem`. Queries Craigslist's undocumented sapi endpoint. For "best deals" sort, routes through the worker instead. Pins its decoder logic to `worker/fixtures/search.json` so it never drifts from `worker/decode.js` silently. HTML bodies get collapsed to plain text by `sanitize()` before rendering. |
 | `worker/decode.js` | Mirrors `CraigslistAPI.swift`'s decoding logic. Turns sapi's positional arrays into real objects. Exported as `decodeItem` and `decodeSearch`. Shares the same `worker/fixtures/search.json` fixture with the Swift implementation. Called by `worker.js` to build responses. |
-| `worker/worker.js` | Cloudflare Worker entry point for web + KMP. Resolves city names to Craigslist area IDs via `areaId()` (seed from bundled `data/areas.json`, cache in Workers KV after first lookup). Forwards search requests to sapi with `rankByDeal()` if sort=deal. Calls `addDealReasons()` to attach Workers AI reasoning to the top 5 results. Returns JSON keyed by `POST /api/search` or `GET /search/full`. Five-minute cache on search responses. CORS headers set to allow any origin. |
-| `worker/fixtures/`, `data/areas.json` + `worker/` | Shared fixtures and seed data. `areas.json` is the bundled city-to-area-id mapping, never changes, checked in to both locations. `worker/fixtures/search.json` is the single decoder test fixture, checked in once, used by both `CraigslistAPI` unit tests (Swift) and `worker/decode.test.mjs` (JavaScript) to prove they never diverge. |
+| `worker/worker.js` | Cloudflare Worker entry point for web + KMP. Resolves city names to Craigslist area IDs via `areaId()` (read from Craigslist's live `reference.craigslist.org/Areas` directory, cached in Workers KV). Also serves `/api/cities` and `/api/nearest` from that same directory. Forwards search requests to sapi with `rankByDeal()` if sort=deal. Calls `addDealReasons()` to attach Workers AI reasoning to the top 5 results. Returns JSON keyed by `POST /api/search` or `GET /search/full`. Five-minute cache on search responses. CORS headers set to allow any origin. |
+| `worker/fixtures/` | Test fixtures only. `worker/fixtures/search.json` is the single decoder test fixture, checked in once, used by both `CraigslistAPI` unit tests (Swift) and `worker/decode.test.mjs` (JavaScript) to prove they never diverge. |
 
 ## iOS / macOS
 
@@ -70,7 +70,6 @@ Craigslist's sapi returns search results as positional arrays indexed against a 
 |---|---|
 | `worker/decode.test.mjs` + `worker/worker.test.mjs` + `worker/deal.test.mjs` | JavaScript test suites for the worker. `decode.test.mjs` verifies `decodeSearch` and `decodeItem` against `worker/fixtures/search.json`. `deal.test.mjs` tests `rankByDeal()` and `addDealReasons()` against varied price/title inputs. `worker.test.mjs` integration tests the full worker. Run with `node --test`. |
 | `scripts/build-site.sh` | Build script for the web landing page. Inlines the Curbfind app into the device frame HTML. |
-| `scripts/fetch-cities.mjs` | Scrapes major city names from Craigslist and generates `data/areas.json` seed. Run periodically to keep the city list fresh. |
 | `docs/privacy.html` | Privacy policy served at `/privacy`. |
 
 ## External services

@@ -18,8 +18,8 @@ upstream quirks shape the design:
 
 - The endpoint needs a numeric **area id**, and Craigslist publishes no area
   directory. The Worker reads the id off a city's search page once (regex on
-  `"areaId":N`), stores it in KV forever, and ships a seed of common cities in
-  `data/areas.json`.
+  `"areaId":N`), stores it in KV forever. Cities, ids and coordinates come from Craigslist's own
+  area directory, nothing is bundled.
 - It ignores `cc` and rejects any page size but 360, so neither is a
   parameter.
 
