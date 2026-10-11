@@ -60,8 +60,8 @@ struct SearchFilters: Equatable {
     var postal = ""
     var distance = ""
     var hasPhoto = false
-    var sort = "rel"
+    var sort = "deal"
 
-    static let sorts = [("rel", "Best match"), ("deal", "Best deals"), ("date", "Newest"),
+    static let sorts = [("deal", "Best deals"), ("rel", "Best match"), ("date", "Newest"),
                         ("priceasc", "Price: low to high"), ("pricedsc", "Price: high to low")]
 }

@@ -47,7 +47,7 @@ struct ListingRow: View {
             Image(systemName: favorites.contains(listing) ? "star.fill" : "star")
         }
         .buttonStyle(.plain)
-        .foregroundStyle(favorites.contains(listing) ? .yellow : .secondary)
+        .foregroundStyle(favorites.contains(listing) ? Color.accentColor : .secondary)
         .accessibilityLabel(favorites.contains(listing) ? "Remove from saved" : "Save listing")
     }
 }

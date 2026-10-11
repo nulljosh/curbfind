@@ -65,63 +65,86 @@ export function rankByDeal(items) {
   return scored;
 }
 
-const VALUE_POOL = 10;
+const VALUE_POOL = 20;
 const AI_TIMEOUT_MS = 12000;
+// Several models vote and their scores are averaged, so one model's bad day
+// can't sink a search. A retired name just drops out of the vote (allSettled).
+const MODELS = [
+  "@cf/meta/llama-3.1-8b-instruct-fp8",
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+  "@cf/mistralai/mistral-small-3.1-24b-instruct",
+  "@cf/google/gemma-3-12b-it",
+];
+// Mean value at or below this means the models agree it isn't the item itself
+// (wanted ad, parts, scam): it is dropped from deal results, not just ranked low.
+const JUNK_VALUE = 2.5;
 
 // AI is a garnish: never let a slow model hold the search hostage.
 const withTimeout = (p, ms = AI_TIMEOUT_MS) =>
   Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error("ai timeout")), ms))]);
 
-// Price-vs-median can't tell a bike from a bike rack. Ask the model to score
+// One model's read of the pool: {value: {id: 0-10}, reasonOf: {id: string}}.
+// Titles are hostile input; the reply is only ever a clamped number or capped
+// string keyed by an id we sent.
+async function scoreWith(model, prompt, ids, env) {
+  const res = await withTimeout(env.AI.run(model, { messages: [{ role: "user", content: prompt }] }));
+  // Models drift on shape (array, bare objects, flat {id: n} map), so read every
+  // flat {...} object on its own instead of trusting the outer JSON.
+  const text = String(res?.response ?? "");
+  const entries = [];
+  const reasonOf = {};
+  for (const m of text.match(/\{[^{}]*\}/g) ?? []) {
+    let o;
+    try { o = JSON.parse(m); } catch { continue; }
+    if (o && "id" in o) {
+      entries.push([o.id, o.value ?? o.score ?? o.rating]);
+      const why = o.why ?? o.reason;
+      if (ids.has(String(o.id)) && typeof why === "string" && why.trim()) reasonOf[String(o.id)] = why.trim().slice(0, MAX_REASON_LEN);
+    }
+    else entries.push(...Object.entries(o ?? {}));
+  }
+  const value = {};
+  for (const [id, raw] of entries) {
+    const v = Number(raw);
+    if (ids.has(String(id)) && Number.isFinite(v)) value[String(id)] = Math.min(10, Math.max(0, v));
+  }
+  if (!Object.keys(value).length) throw new Error(`${model}: no usable scores in ${text.slice(0, 120)}`);
+  return { value, reasonOf };
+}
+
+// Price-vs-median can't tell a bike from a bike rack. Ask every model to score
 // the cheapest candidates for real bang for the buck (is it the thing searched,
-// is it sound, any scam or parts-only red flags), then weight the price score
-// by it. Same trust model as addDealReasons: titles are hostile input, the reply
-// is only ever a clamped number keyed by an id we sent. Best-effort: any failure
-// returns the price ranking untouched.
+// is it sound, any scam or parts-only red flags), average the votes, weight the
+// price score by it, and drop what they agree is junk. Best-effort: if no model
+// answers, the price ranking comes back untouched.
 export async function rerankByValue(items, env, query = "") {
   const pool = items.filter((i) => i.dealScore > -Infinity).slice(0, VALUE_POOL);
   if (pool.length < 2 || !env.AI) return items;
   const ids = new Set(pool.map((i) => String(i.id)));
   const list = pool.map((i) => `${i.id}: "${i.title.slice(0, 200).replace(/"/g, "'")}" - ${i.priceString}`).join("\n");
   const want = query ? `The buyer searched for "${String(query).slice(0, 80).replace(/"/g, "'")}". ` : "";
-  try {
-    const res = await withTimeout(env.AI.run("@cf/meta/llama-3.1-8b-instruct-fp8", {
-      messages: [{
-        role: "user",
-        content: `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, or anything that is not the item itself (parts, components, tires, pedals, clothing, accessories, cases, broken or for-parts). 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`,
-      }],
-    }));
-    // Models drift on shape (array, bare objects, flat {id: n} map), so read every
-    // flat {...} object on its own instead of trusting the outer JSON.
-    const text = String(res?.response ?? "");
-    const entries = [];
-    const reasonOf = {};
-    for (const m of text.match(/\{[^{}]*\}/g) ?? []) {
-      let o;
-      try { o = JSON.parse(m); } catch { continue; }
-      if (o && "id" in o) {
-        entries.push([o.id, o.value ?? o.score ?? o.rating]);
-        const why = o.why ?? o.reason;
-        if (ids.has(String(o.id)) && typeof why === "string" && why.trim()) reasonOf[String(o.id)] = why.trim().slice(0, MAX_REASON_LEN);
-      }
-      else entries.push(...Object.entries(o ?? {}));
-    }
-    const value = {};
-    for (const [id, raw] of entries) {
-      const v = Number(raw);
-      if (ids.has(String(id)) && Number.isFinite(v)) value[String(id)] = Math.min(10, Math.max(0, v));
-    }
-    if (!Object.keys(value).length) console.warn("rerankByValue: no usable scores in", text.slice(0, 200));
-    if (!Object.keys(value).length) return items;
-    // Unscored pool items get a neutral 5 so one missed id doesn't sink a listing.
-    const scored = pool.map((i) => ({ ...i, valueScore: value[String(i.id)] ?? 5, ...(reasonOf[String(i.id)] ? { dealReason: reasonOf[String(i.id)] } : {}) }));
-    scored.sort((a, b) => b.dealScore * (b.valueScore / 10) - a.dealScore * (a.valueScore / 10));
-    const poolIds = new Set(scored.map((i) => i.id));
-    return [...scored, ...items.filter((i) => !poolIds.has(i.id))];
-  } catch (err) {
-    console.error("rerankByValue:", err);
-    return items;
-  }
+  const prompt = `${want}Rate each classifieds listing 0-10 for bang for the buck. 0-2: scam, stolen, wanted ad, or anything that is not the item itself (parts, components, tires, pedals, clothing, accessories, cases, broken or for-parts). 3-5: weak or unclear. 6-8: solid value. 9-10: clearly underpriced for what it is. Reply as JSON only, no other text: [{"id": "...", "value": 7}].\n\n${list}`;
+  const votes = (await Promise.allSettled(MODELS.map((m) => scoreWith(m, prompt, ids, env))))
+    .flatMap((r) => {
+      if (r.status === "fulfilled") return [r.value];
+      console.error("rerankByValue:", r.reason);
+      return [];
+    });
+  if (!votes.length) return items;
+  const mean = (id) => {
+    const v = votes.map((x) => x.value[id]).filter((n) => n != null);
+    return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 5; // unscored: neutral, one missed id doesn't sink a listing
+  };
+  const scored = pool
+    .map((i) => {
+      const id = String(i.id);
+      const why = votes.map((x) => x.reasonOf[id]).find(Boolean);
+      return { ...i, valueScore: mean(id), ...(why ? { dealReason: why } : {}) };
+    })
+    .filter((i) => i.valueScore > JUNK_VALUE);
+  scored.sort((a, b) => b.dealScore * (b.valueScore / 10) - a.dealScore * (a.valueScore / 10));
+  const poolIds = new Set(pool.map((i) => i.id));
+  return [...scored, ...items.filter((i) => !poolIds.has(i.id))];
 }
 
 const MAX_REASON_LEN = 80;

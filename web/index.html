@@ -13,7 +13,8 @@
 <style>
 /* Curbfind: its own mark, not the Jaybulb yellow. Curb blue,
    a torn-corner card, everything else inherited from tokens.css. */
-:root{--curb:#0044cc;--curb-deep:#002f8f}
+:root{--curb:#0044cc;--curb-deep:#002f8f;--bulb:#0044cc;--bulb-deep:#002f8f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bulb:#5b8cff;--bulb-deep:#5b8cff}}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);font-size:15px;line-height:1.45}
 header{border-bottom:2px solid var(--text);padding:14px 16px;position:sticky;top:0;background:var(--bg);z-index:5}
@@ -91,8 +92,8 @@ footer a{color:inherit}
       <input class="narrow" id="postal" placeholder="Postal" aria-label="Postal code">
       <input class="narrow" id="search_distance" type="number" min="1" placeholder="km" aria-label="Distance">
       <select id="sort" aria-label="Sort">
+        <option value="deal" selected>Best deals (AI)</option>
         <option value="rel">Best match</option>
-        <option value="deal">Best deals (AI)</option>
         <option value="date">Newest</option>
         <option value="priceasc">Price: low to high</option>
         <option value="pricedsc">Price: high to low</option>

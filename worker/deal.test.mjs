@@ -303,7 +303,7 @@ test("rerankByValue demotes a cheap scam below a solid deal", async () => {
   const ai = { run: async () => ({ response: '[{"id":"scam","value":0},{"id":"good","value":9}]' }) };
   const out = await rerankByValue(items, { AI: ai }, "bike");
   assert.equal(out[0].id, "good");
-  assert.equal(out.length, items.length);
+  assert.ok(!out.some((i) => i.id === "scam"), "agreed-junk listings are dropped, not just demoted");
 });
 
 test("rerankByValue returns the price ranking when the model fails or lies", async () => {
