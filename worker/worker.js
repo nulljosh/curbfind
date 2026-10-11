@@ -65,19 +65,28 @@ export function rankByDeal(items) {
   return scored;
 }
 
+// Small models wave accessories through, so catch the obvious ones by word:
+// a listing for "pedals" or "rack" is not what someone searching "bike" wants
+// unless they typed that word themselves. ponytail: fixed list, grow it from real misses.
+const PARTS = /\b(pedals?|racks?|stems?|handlebars?|kickstands?|carriers?|tires?|tubes?|fenders?|helmets?|saddles?|cases?|covers?|chargers?|cables?|mounts?|straps?|parts?|stands?|wanted|iso|looking for|wtb)\b/gi;
+export function dropParts(items, query = "") {
+  const q = String(query).toLowerCase();
+  if (!q.trim()) return items;
+  return items.filter((i) => ![...String(i.title).matchAll(PARTS)].some((m) => !q.includes(m[1].toLowerCase().replace(/s$/, ""))));
+}
+
 const VALUE_POOL = 20;
-const AI_TIMEOUT_MS = 12000;
+const AI_TIMEOUT_MS = 5000;
 // Several models vote and their scores are averaged, so one model's bad day
 // can't sink a search. A retired name just drops out of the vote (allSettled).
 const MODELS = [
   "@cf/meta/llama-3.1-8b-instruct-fp8",
-  "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-  "@cf/mistralai/mistral-small-3.1-24b-instruct",
-  "@cf/google/gemma-3-12b-it",
+  "@cf/meta/llama-3.2-3b-instruct",
+  "@cf/qwen/qwen3-30b-a3b-fp8",
 ];
 // Mean value at or below this means the models agree it isn't the item itself
 // (wanted ad, parts, scam): it is dropped from deal results, not just ranked low.
-const JUNK_VALUE = 2.5;
+const JUNK_VALUE = 3.5;
 
 // AI is a garnish: never let a slow model hold the search hostage.
 const withTimeout = (p, ms = AI_TIMEOUT_MS) =>
@@ -230,7 +239,7 @@ async function search(url, env) {
   if (dealSort) {
     // Value scoring and the one-line reasons are independent model calls, so run
     // them side by side: wall time is the slower one, not the sum.
-    const ranked = rankByDeal(items);
+    const ranked = rankByDeal(dropParts(items, p.get("q")));
     const [reasoned, valued] = await Promise.all([addDealReasons(ranked, env), rerankByValue(ranked, env, p.get("q"))]);
     const reasonOf = new Map(reasoned.filter((i) => i.dealReason).map((i) => [i.id, i.dealReason]));
     items = valued.map((i) => (reasonOf.has(i.id) ? { ...i, dealReason: reasonOf.get(i.id) } : i));

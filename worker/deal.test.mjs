@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { rankByDeal, addDealReasons, rerankByValue } from "./worker.js";
+import { rankByDeal, addDealReasons, rerankByValue, dropParts } from "./worker.js";
 import worker from "./worker.js";
 
 // --- rankByDeal --------------------------------------------------------
@@ -324,4 +324,11 @@ test("rerankByValue reads bare objects the model forgot to wrap in an array", as
   ]);
   const ai = { run: async () => ({ response: '{"id": "a", "value": 0},\n{"id": "b", "value": 9}' }) };
   assert.equal((await rerankByValue(items, { AI: ai }))[0].id, "b");
+});
+
+test("dropParts removes accessories and wanted ads unless the query asks for them", () => {
+  const items = [{ title: "Trek 820 bike" }, { title: "Bike rack" }, { title: "WTB mountain bike" }, { title: "Road bike pedals" }];
+  assert.deepEqual(dropParts(items, "bike").map((i) => i.title), ["Trek 820 bike"]);
+  assert.equal(dropParts(items, "bike rack").length, 2);
+  assert.equal(dropParts(items, "").length, 4);
 });
