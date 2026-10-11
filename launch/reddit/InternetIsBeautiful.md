@@ -11,4 +11,4 @@ There's also a sort that ranks listings against the median price of that same se
 
 Free to use, works on the web straight away.
 
-https://curbfind.heyitsmejosh.com
+https://curbfind.jaybulb.com

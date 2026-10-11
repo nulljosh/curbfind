@@ -15,4 +15,4 @@ It's free on web, iOS, macOS, Android and desktop, no catch.
 
 Would like feedback on the search UX and whether the deal-ranking sort is actually useful or just noise.
 
-https://curbfind.heyitsmejosh.com
+https://curbfind.jaybulb.com

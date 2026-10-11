@@ -24,6 +24,6 @@ Favourites live in localStorage or UserDefaults. Nothing is sent anywhere. There
 Curbfind is free, full stop, on web, iOS, macOS, Android, and desktop. No subscription, no paywall, no ads. Nothing is held back behind a price today.
 
 **Links:**
-- Web: https://curbfind.heyitsmejosh.com
+- Web: https://curbfind.jaybulb.com
 - App Store: https://apps.apple.com/app/id6809031662
 - GitHub: https://github.com/nulljosh/curbfind
