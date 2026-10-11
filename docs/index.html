@@ -11,7 +11,8 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <style>
 /* Curbfind's own blue, matching web/index.html's --curb token -- not the shared Jaybulb yellow. */
-:root{--curb:#0044cc;--curb-deep:#002f8f;--curb-tint:#dce6f7}
+:root{--curb:#0044cc;--curb-deep:#002f8f;--curb-tint:#dce6f7;--bulb:#0044cc;--bulb-deep:#002f8f;--color-hairline:#d9e1f5;--border:#d9e1f5;--color-underline:#0044cc;--color-underline-hover:#002f8f}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bulb:#5b8cff;--bulb-deep:#5b8cff;--color-hairline:rgba(91,140,255,.25);--border:rgba(91,140,255,.25);--color-underline:#5b8cff;--color-underline-hover:#5b8cff}}
 *{box-sizing:border-box}
 html{scroll-snap-type:y proximity}
 body{margin:0;font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.5}
