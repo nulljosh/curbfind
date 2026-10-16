@@ -30,4 +30,3 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Ingested 2026-10-16
 - [ ] Needs iOS ship (macOS live, iOS 1.0.0 waiting). (screenshot: notes/attachments/2026-10-16/app-store-releases-1.png)
-- [ ] Needs iOS ship (macOS live, iOS 1.0.0 waiting). (screenshot: notes/attachments/2026-10-16/app-store-releases-1.png)
