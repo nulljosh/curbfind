@@ -1,5 +1,7 @@
 # Curbfind roadmap
 
+> Priority tier 1 (2026-10-17): live blocker, work first. Order: live blockers, ship pushes, active features, portfolio, exploratory. See ~/Documents/Code/LOOP-HANDOFF.md.
+
 Classifieds browser over Craigslist's undocumented JSON API.
 Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
