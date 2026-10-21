@@ -32,6 +32,7 @@ Plan: `~/.claude/plans/magical-noodling-candy.md`.
 
 ## Ingested 2026-10-16
 - [ ] Needs iOS ship (macOS live, iOS 1.0.0 waiting). (screenshot: notes/attachments/2026-10-16/app-store-releases-1.png)
+  - 2026-10-21 check: iOS 1.0.0 is PREPARE_FOR_SUBMISSION with submission a5b53544 UNRESOLVED_ISSUES (rejected 2026-10-05 under 4.3 spam + 4.2.6; the nine-question reply went out 2026-10-05 18:00, no resubmit). Blocked on Joshua: `asc web auth login` (2FA) so `asc web review show --app 6809031662` can read whether Apple answered. Never resubmit unchanged; if Apple holds the line, it needs real new iOS-only features first.
 
 ## Ingested 2026-10-17
 - [ ] Better name. (Clarify: rename candidates, .com only, single word.)
